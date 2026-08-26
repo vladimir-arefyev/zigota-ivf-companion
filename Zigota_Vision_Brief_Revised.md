@@ -1,6 +1,6 @@
-# Zigota — Vision Brief (2025 Rework)
+# Zigota — Vision Brief (2026 Rework)
 
-*An AI companion for IVF patients. Rethought from a 2021 mobile-app concept against 2025 tooling.*
+*An AI companion for IVF patients. Rethought from a 2021 mobile-app concept against 2026 context.*
 
 **Status:** Draft v0.1 · **Author:** Vladimir Arefyev · **Format:** living document
 
@@ -8,24 +8,24 @@
 
 ## TL;DR
 
-Zigota began in 2021 as an iOS app to reduce IVF patient anxiety through a medication calendar and an educational section. The job-to-be-done has not changed. What changed is that the three hardest parts of that original app — manual setup, static generic content, and inert data — are exactly the frictions that large language models now remove cheaply.
+Zigota began in 2021 as an iOS app to reduce IVF patient anxiety through a medication calendar and an educational section. The job-to-be-done has not changed since then. What changed is that the three hardest parts of that original app — manual setup, static generic content, and inert data — are exactly the frictions that large language models now remove cheaply.
 
-The 2025 rework is therefore **not a pivot but a change of interface paradigm**: from a UI-first app (tab bar, sections, forms) to a **conversation-first companion on top of a structured backend**. The patient photographs their prescription list; the companion turns it into a living, day-by-day plan, answers "what do I do today?" and "is this normal?" from verified information, and quietly builds the structured protocol record their clinic never had.
+The 2026 rework is therefore **not a pivot but a change of interface paradigm**: from a UI-first app (tab bar, sections, forms) to a **conversation-first companion on top of a structured backend**. The patient photographs their prescription list; the companion turns it into a living, day-by-day plan, answers "what do I do today?" and "is this normal?" from verified information, and quietly builds the structured protocol record their clinic never had.
 
 The AI is an **interface to structured data and vetted content — never a source of medical judgment.** That boundary is what keeps the product safe, defensible, and out of medical-device territory.
 
 ---
 
-## 1. Problem, re-examined for 2025
+## 1. Problem, re-examined for 2026
 
-The original problem statement still holds; three years of hindsight only sharpen it.
+The original problem statement still holds; four years of hindsight only sharpen it.
 
 An IVF cycle is a weeks-long, high-stakes medical protocol that a patient largely self-administers at home: timed injections, medications keyed to meals, clinic visits, and monitoring — under significant emotional load. The patient's felt problem is **anxiety**, and it has two roots:
 
 - **Loss of control** — "Did I take that at the right time? Have I missed something? What happens today?" The default tools are a paper prescription list, a mix of phone reminders, and memory.
 - **Loss of understanding** — "Is this cramping normal or a warning sign? What does this stage even do?" Information is fragmented across forums, clinic leaflets, and search results that often contradict each other.
 
-What is genuinely different in 2025:
+What is genuinely different in 2026:
 
 - **Setup friction is now optional.** In 2021, giving a patient a plan meant they had to build it — install an app, register, and manually enter every medication and time. Vision-capable models can read a photographed prescription list and propose the schedule, collapsing setup to a single confirmation step.
 - **Content can be personal, not generic.** A static "stages of IVF" article is the same for everyone. A retrieval-grounded assistant can answer the patient's *actual* question, in context, against a curated knowledge base.
@@ -33,7 +33,7 @@ What is genuinely different in 2025:
 
 ## 2. The reframe
 
-| | 2021 concept | 2025 rework |
+| | 2021 concept | 2026 rework |
 |---|---|---|
 | **Paradigm** | UI-first mobile app | Conversation-first companion |
 | **Interaction** | Navigate tabs → sections → forms | Ask, or be nudged, in one place |
@@ -48,7 +48,7 @@ The point of the table is the last row. Everything above it is *how*; the *what*
 
 The original personas still describe the user well: a patient (typically mid-30s), often partnered, either deciding whether to pursue IVF or already mid-protocol with a chosen clinic. Their goals — *have a plan on hand, don't forget anything important, understand what's happening, know what to do if it doesn't work* — and their pains — *side effects, stress on self and partner, fear of doing something wrong, needing reassurance* — map directly onto the two roots of anxiety in §1.
 
-The 2025 companion serves the *mid-protocol* moment most sharply: the patient who has a prescription list in hand and needs it to become a plan they can trust.
+The 2026 companion serves the *mid-protocol* moment most sharply: the patient who has a prescription list in hand and needs it to become a plan they can trust.
 
 ## 4. What the companion is
 
@@ -88,7 +88,7 @@ The patient-facing companion is the product. But its by-product is what makes Zi
 
 Today, clinics hand out paper prescription lists, receive no feedback on whether medications were actually taken, and store unstructured histories that are hard to analyze. The 2021 pitch already identified this: clinics and pharma want **standardized, digitized protocols and structured adherence data**, and patients generating that data as a side-effect of getting help is the mechanism.
 
-Because the 2025 companion structures data *at the point of capture* — a confirmed schedule, adherence marks, logged symptoms, questions asked — it produces exactly the clean protocol-adherence record clinics never had. That record is the foundation of the eventual business (clinic dashboards, protocol standardization, de-identified data for research) and the reason the companion is a platform, not a toy.
+Because the 2026 companion structures data *at the point of capture* — a confirmed schedule, adherence marks, logged symptoms, questions asked — it produces exactly the clean protocol-adherence record clinics never had. That record is the foundation of the eventual business (clinic dashboards, protocol standardization, de-identified data for research) and the reason the companion is a platform, not a toy.
 
 *Scope note:* the clinic-facing surface is **not** part of the first MVP. It is stated here as the "why this matters" layer so the vision reads as a business. The MVP demonstrates the patient experience; the data it structures is what the business is later built on.
 
@@ -109,7 +109,7 @@ Because the 2025 companion structures data *at the point of capture* — a confi
 - Real-time clinician chat / telemedicine.
 
 **Protocol handling:**
-The vision is **protocol-agnostic** — the companion adapts to whatever a given prescription list contains, rather than hard-coding a single treatment path. For the build and demo, we anchor on **one representative stimulation protocol as the concrete worked example**: a controlled ovarian **superovulation-stimulation** cycle, drawn from a real clinic patient card (AVA-Peter, "Стимуляция суперовуляции"). It spans the three phases every stimulation cycle shares — daily stimulation, a precisely-timed trigger plus puncture, and post-transfer luteal support — which makes it a faithful stand-in for the general case rather than a narrow special case. Other protocols and clinic formats are roadmap. See the worked-example appendix.
+The vision is **protocol-agnostic** — the companion adapts to whatever a given prescription list contains, rather than hard-coding a single treatment path. For the build and demo, we anchor on **one representative stimulation protocol as the concrete worked example**: a controlled ovarian **superovulation-stimulation** cycle, drawn from a real clinic patient card. It spans the three phases every stimulation cycle shares — daily stimulation, a precisely-timed trigger plus puncture, and post-transfer luteal support — which makes it a faithful stand-in for the general case rather than a narrow special case. Other protocols and clinic formats are roadmap. See the worked-example appendix.
 
 **Surface:**
 A self-contained web application. The conversational UX lives inside an interface fully under our control — simpler to build, show, and reason about than a third-party messenger bot, with no external platform approvals in the critical path.
@@ -123,13 +123,13 @@ A self-contained web application. The conversational UX lives inside an interfac
 
 ---
 
-*This document is a living brief. It is intended to anchor the build and to serve as the first artifact of the rework's product narrative — showing not just what was built, but how a 2021 concept was re-evaluated against 2025 technology and constraints.*
+*This document is a living brief. It is intended to anchor the build and to serve as the first artifact of the rework's product narrative — showing not just what was built, but how a 2021 concept was re-evaluated against 2026 technology and constraints.*
 
 ---
 
 ## Appendix A — Worked example: the anchored protocol
 
-The MVP is built and demoed against one concrete, real-world instance: a controlled ovarian **superovulation-stimulation** cycle, taken from a clinic patient card ("Стимуляция суперовуляции", AVA-Peter). It is not a hard-coded path — it is the first prescription list the companion is proven to parse and schedule end to end. It is chosen because it exercises every hard part of the general problem in a single document.
+The MVP is built and demoed against one concrete, real-world instance: a controlled ovarian **superovulation-stimulation** cycle, taken from a clinic patient card. It is not a hard-coded path — it is the first prescription list the companion is proven to parse and schedule end to end. It is chosen because it exercises every hard part of the general problem in a single document.
 
 **Why this instance is representative.** Every stimulation cycle, regardless of clinic or drug brand, moves through the same three phases. This card contains all three, so modeling it convincingly covers the shape of the general case:
 
