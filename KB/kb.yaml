@@ -1,0 +1,1525 @@
+# ============================================================
+# Zigota IVF/ART Patient-Education Knowledge Base
+# Extraction run — grouped by kind: out_of_scope, glossary, stage,
+# medication, instruction, warning
+# review.validated_by / reviewed_on are null pending human validation.
+# ============================================================
+
+# ---------- out_of_scope (refusal stubs — written first) ----------
+
+- id: oos.dose
+  kind: out_of_scope
+  phase: cross
+  topic: Dose questions
+  aliases: [how much, what dose, how many units, dosage, сколько, доза, сколько единиц]
+  body: >
+    I can't advise on doses — how much of each medication you take is set by your clinic
+    specifically for you. Please check with your care team for anything about your dose.
+  scope: out_of_scope
+  confidence: n/a
+  source:
+    cite:
+      - name: Extraction policy
+        ref: 03_OUT_OF_SCOPE.md
+        access: from_report
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: null
+
+- id: oos.protocol_choice
+  kind: out_of_scope
+  phase: cross
+  topic: Which protocol is right for me
+  aliases: [which protocol should I be on, is antagonist protocol right for me, which stimulation protocol, какой протокол мне подходит]
+  body: >
+    I can't tell you which stimulation protocol or medication plan is right for you — that
+    choice is made by your clinic based on your individual history and test results. Please
+    discuss protocol options with your care team.
+  scope: out_of_scope
+  confidence: n/a
+  source:
+    cite:
+      - name: Extraction policy
+        ref: 03_OUT_OF_SCOPE.md
+        access: from_report
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: null
+
+- id: oos.med_change
+  kind: out_of_scope
+  phase: cross
+  topic: Changing or skipping a medication
+  aliases: [should I stop my medication, can I skip a dose, can I adjust my dose, change my medicine, можно ли пропустить укол]
+  body: >
+    I can't advise on stopping, skipping, or changing any medication or its timing. Please
+    contact your clinic right away if you're considering or have already made a change —
+    they can tell you what to do next.
+  scope: out_of_scope
+  confidence: n/a
+  source:
+    cite:
+      - name: Extraction policy
+        ref: 03_OUT_OF_SCOPE.md
+        access: from_report
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: null
+
+- id: oos.symptom_normal
+  kind: out_of_scope
+  phase: cross
+  topic: Is this symptom normal
+  aliases: [is this normal, is this okay, is this dangerous, how bad is this, это нормально, это опасно]
+  body: >
+    I can't judge whether a symptom you're having is normal, mild, or serious for you — that
+    needs a clinician's assessment. If you're worried, please contact your clinic; if you feel
+    very unwell, seek urgent care.
+  scope: out_of_scope
+  confidence: n/a
+  source:
+    cite:
+      - name: Extraction policy
+        ref: 03_OUT_OF_SCOPE.md
+        access: from_report
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: null
+
+- id: oos.lab_interpret
+  kind: out_of_scope
+  phase: cross
+  topic: What my numbers or scan mean
+  aliases: [what do my numbers mean, what does my scan show, what does my estradiol level mean, что значат мои анализы]
+  body: >
+    I can't interpret your personal lab results, scan findings, or hormone levels — only your
+    clinical team has the full picture needed to explain what your numbers mean for you.
+    Please ask your clinic to walk you through your results.
+  scope: out_of_scope
+  confidence: n/a
+  source:
+    cite:
+      - name: Extraction policy
+        ref: 03_OUT_OF_SCOPE.md
+        access: from_report
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: null
+
+- id: oos.success_odds
+  kind: out_of_scope
+  phase: cross
+  topic: My personal chances of success
+  aliases: [what are my chances, will this work for me, my odds of pregnancy, мои шансы на успех]
+  body: >
+    I can't estimate your personal chances of a successful cycle — that depends on many
+    individual factors your clinic weighs together. Please ask your care team for a
+    personalized assessment.
+  scope: out_of_scope
+  confidence: n/a
+  source:
+    cite:
+      - name: Extraction policy
+        ref: 03_OUT_OF_SCOPE.md
+        access: from_report
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: null
+
+- id: oos.date_predict
+  kind: out_of_scope
+  phase: cross
+  topic: Predicting my trigger, retrieval, or transfer date
+  aliases: [when will my trigger be, when will my retrieval be, when will my transfer be, predict my dates, когда будет пункция]
+  body: >
+    I can't predict or calculate your trigger, retrieval, or transfer date — these are set by
+    your clinic based on your monitoring results. Please check with your care team for your
+    exact schedule.
+  scope: out_of_scope
+  confidence: n/a
+  source:
+    cite:
+      - name: Extraction policy
+        ref: 03_OUT_OF_SCOPE.md
+        access: from_report
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: null
+
+- id: oos.diagnosis
+  kind: out_of_scope
+  phase: cross
+  topic: Do I have this condition
+  aliases: [do I have OHSS, is this OHSS, do I have an infection, diagnose my symptoms, у меня гиперстимуляция]
+  body: >
+    I can't diagnose a condition from what you describe — only your clinic can examine you and
+    confirm what's happening. If you have concerning symptoms, please contact them, or seek
+    urgent care if you feel very unwell.
+  scope: out_of_scope
+  confidence: n/a
+  source:
+    cite:
+      - name: Extraction policy
+        ref: 03_OUT_OF_SCOPE.md
+        access: from_report
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: null
+
+# ---------- glossary ----------
+
+- id: glossary.follicle
+  kind: glossary
+  phase: 1
+  topic: Follicle
+  aliases: [follicle, follicles, egg sac, фолликул]
+  body: >
+    A fluid-filled structure in the ovary that contains an egg and the cells that produce
+    hormones. During stimulation, several follicles are encouraged to grow and are tracked by
+    ultrasound.
+  scope: in_scope
+  confidence: agreed
+  source:
+    cite:
+      - name: ASRM booklet
+        ref: https://www.reproductivefacts.org/news-and-publications/fact-sheets-and-infographics/assisted-reproductive-technologies-booklet/
+        access: live
+      - name: Mayo Clinic
+        ref: https://www.mayoclinic.org/tests-procedures/in-vitro-fertilization/about/pac-20384716
+        access: live
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "2015/2018 ed.; Mayo 2023"
+
+- id: glossary.oocyte
+  kind: glossary
+  phase: 1
+  topic: Oocyte / egg
+  aliases: [oocyte, egg, ovum, яйцеклетка]
+  body: >
+    The female sex cell (ovum) produced by the ovary. In an IVF cycle, mature eggs are
+    collected at egg retrieval so they can be fertilized in the lab.
+  scope: in_scope
+  confidence: agreed
+  source:
+    cite:
+      - name: ASRM booklet
+        ref: https://www.reproductivefacts.org/news-and-publications/fact-sheets-and-infographics/assisted-reproductive-technologies-booklet/
+        access: live
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "2015/2018 ed."
+
+- id: glossary.estradiol
+  kind: glossary
+  phase: 1
+  topic: Estradiol
+  aliases: [estradiol, estrogen level, эстрадиол]
+  body: >
+    The main estrogen hormone made by the growing follicles. Its level is checked by blood
+    test during stimulation and normally rises as follicles develop.
+  scope: in_scope
+  confidence: agreed
+  source:
+    cite:
+      - name: ASRM booklet
+        ref: https://www.reproductivefacts.org/news-and-publications/fact-sheets-and-infographics/assisted-reproductive-technologies-booklet/
+        access: live
+      - name: Mayo Clinic
+        ref: https://www.mayoclinic.org/tests-procedures/in-vitro-fertilization/about/pac-20384716
+        access: live
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "2015/2018 ed.; Mayo 2023"
+
+- id: glossary.egg_retrieval
+  kind: glossary
+  phase: 2
+  topic: Egg retrieval / oocyte aspiration
+  aliases: [egg retrieval, oocyte aspiration, follicular aspiration, transvaginal ultrasound aspiration, пункция фолликулов]
+  body: >
+    The procedure in which eggs are collected by guiding a thin needle through the vagina into
+    each ovarian follicle and drawing out the fluid and egg with gentle suction, using
+    ultrasound to guide the needle.
+  scope: in_scope
+  confidence: agreed
+  source:
+    cite:
+      - name: ASRM booklet
+        ref: https://www.reproductivefacts.org/news-and-publications/fact-sheets-and-infographics/assisted-reproductive-technologies-booklet/
+        access: live
+      - name: MedlinePlus
+        ref: https://medlineplus.gov/ency/article/007279.htm
+        access: live
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "2015/2018 ed.; MedlinePlus 2026"
+
+- id: glossary.icsi
+  kind: glossary
+  phase: 2
+  topic: ICSI (intracytoplasmic sperm injection)
+  aliases: [ICSI, sperm injection, ИКСИ]
+  body: >
+    A lab technique in which a single sperm is injected directly into a mature egg, used mainly
+    when fertilization by mixing sperm and egg together is less likely to succeed.
+  scope: in_scope
+  confidence: agreed
+  source:
+    cite:
+      - name: ASRM booklet
+        ref: https://www.reproductivefacts.org/news-and-publications/fact-sheets-and-infographics/assisted-reproductive-technologies-booklet/
+        access: live
+      - name: Mayo Clinic
+        ref: https://www.mayoclinic.org/tests-procedures/in-vitro-fertilization/about/pac-20384716
+        access: live
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "2015/2018 ed.; Mayo 2023"
+
+- id: glossary.embryo
+  kind: glossary
+  phase: 2
+  topic: Embryo
+  aliases: [embryo, fertilized egg, эмбрион]
+  body: >
+    A fertilized egg that has begun dividing into cells. Embryos are grown in the lab (embryo
+    culture) for a few days before transfer or freezing.
+  scope: in_scope
+  confidence: agreed
+  source:
+    cite:
+      - name: ASRM booklet
+        ref: https://www.reproductivefacts.org/news-and-publications/fact-sheets-and-infographics/assisted-reproductive-technologies-booklet/
+        access: live
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "2015/2018 ed."
+
+- id: glossary.blastocyst
+  kind: glossary
+  phase: 2
+  topic: Blastocyst
+  aliases: [blastocyst, day 5 embryo, бластоциста]
+  body: >
+    An embryo that has developed a fluid-filled cavity, usually by day 5 after egg retrieval,
+    when the cells begin separating into the parts that will form the placenta and the embryo.
+  scope: in_scope
+  confidence: agreed
+  source:
+    cite:
+      - name: ASRM booklet
+        ref: https://www.reproductivefacts.org/news-and-publications/fact-sheets-and-infographics/assisted-reproductive-technologies-booklet/
+        access: live
+      - name: Mayo Clinic
+        ref: https://www.mayoclinic.org/tests-procedures/in-vitro-fertilization/about/pac-20384716
+        access: live
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "2015/2018 ed.; Mayo 2023"
+
+- id: glossary.zona_pellucida
+  kind: glossary
+  phase: 2
+  topic: Zona pellucida / assisted hatching
+  aliases: [zona pellucida, assisted hatching, зона пеллюцида]
+  body: >
+    The zona pellucida is the egg's outer shell, which a sperm must penetrate and which the
+    embryo must later break out of ("hatch") to implant. Assisted hatching is a lab technique
+    that opens this shell slightly before transfer to help that process.
+  scope: in_scope
+  confidence: agreed
+  source:
+    cite:
+      - name: ASRM booklet
+        ref: https://www.reproductivefacts.org/news-and-publications/fact-sheets-and-infographics/assisted-reproductive-technologies-booklet/
+        access: live
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "2015/2018 ed."
+
+- id: glossary.hcg
+  kind: glossary
+  phase: cross
+  topic: hCG (human chorionic gonadotropin)
+  aliases: [hCG, human chorionic gonadotropin, ХГЧ]
+  body: >
+    A hormone that, in medication form, triggers final egg maturation before retrieval. hCG is
+    also the hormone produced by an early pregnancy and is what pregnancy blood tests measure.
+  scope: in_scope
+  confidence: agreed
+  source:
+    cite:
+      - name: ASRM booklet
+        ref: https://www.reproductivefacts.org/news-and-publications/fact-sheets-and-infographics/assisted-reproductive-technologies-booklet/
+        access: live
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "2015/2018 ed."
+
+- id: glossary.beta_hcg
+  kind: glossary
+  phase: 3
+  topic: Beta-hCG (pregnancy blood test)
+  aliases: [beta-hCG, pregnancy blood test, quantitative hCG test, бета-ХГЧ]
+  body: >
+    A blood test that measures the level of hCG hormone to confirm and monitor an early
+    pregnancy after embryo transfer. It's done on a specific day set by the clinic.
+  scope: in_scope
+  confidence: agreed
+  source:
+    cite:
+      - name: MedlinePlus
+        ref: https://medlineplus.gov/ency/article/007279.htm
+        access: live
+      - name: NHS
+        ref: https://www.nhs.uk/tests-and-treatments/ivf/
+        access: live
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "MedlinePlus 2026; NHS 2025"
+
+- id: glossary.progesterone_term
+  kind: glossary
+  phase: 3
+  topic: Progesterone
+  aliases: [progesterone, luteal hormone, прогестерон]
+  body: >
+    A hormone that prepares and maintains the lining of the uterus so a fertilized egg can
+    attach and grow. It's supplemented after embryo transfer as part of luteal support.
+  scope: in_scope
+  confidence: agreed
+  source:
+    cite:
+      - name: MedlinePlus
+        ref: https://medlineplus.gov/ency/article/007279.htm
+        access: live
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "MedlinePlus 2026"
+
+- id: glossary.luteal_phase
+  kind: glossary
+  phase: 3
+  topic: Luteal phase
+  aliases: [luteal phase, luteal support phase, лютеиновая фаза]
+  body: >
+    The period after egg retrieval (and, in a natural cycle, after ovulation) during which the
+    uterine lining is prepared for a possible pregnancy, typically supported with progesterone
+    medication in IVF.
+  scope: in_scope
+  confidence: agreed
+  source:
+    cite:
+      - name: SART
+        ref: https://www.sart.org/patients/a-patients-guide-to-assisted-reproductive-technology/
+        access: from_report
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: null
+
+- id: glossary.gnrh_agonist_term
+  kind: glossary
+  phase: 1
+  topic: GnRH agonist
+  aliases: [GnRH agonist, Lupron, agonist protocol drug, агонист ГнРГ]
+  body: >
+    A medication that first briefly stimulates, then suppresses, the pituitary gland's hormone
+    signals, used to prevent the ovaries from releasing eggs too early during stimulation.
+  scope: in_scope
+  confidence: agreed
+  source:
+    cite:
+      - name: SART
+        ref: https://www.sart.org/patients/a-patients-guide-to-assisted-reproductive-technology/
+        access: from_report
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: null
+
+- id: glossary.gnrh_antagonist_term
+  kind: glossary
+  phase: 1
+  topic: GnRH antagonist
+  aliases: [GnRH antagonist, Cetrotide, Orgalutran, antagonist protocol drug, антагонист ГнРГ]
+  body: >
+    A medication that immediately blocks the pituitary gland's hormone signal to prevent
+    premature ovulation. It's usually started partway through stimulation.
+  scope: in_scope
+  confidence: agreed
+  source:
+    cite:
+      - name: SART
+        ref: https://www.sart.org/patients/a-patients-guide-to-assisted-reproductive-technology/
+        access: from_report
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: null
+
+- id: glossary.gonadotropins_term
+  kind: glossary
+  phase: 1
+  topic: Gonadotropins (FSH/LH)
+  aliases: [gonadotropins, FSH, LH, follicle-stimulating hormone, luteinizing hormone, гонадотропины]
+  body: >
+    Injectable hormones (follicle-stimulating hormone and/or luteinizing hormone) that
+    stimulate the ovaries to grow multiple eggs during a treatment cycle.
+  scope: in_scope
+  confidence: agreed
+  source:
+    cite:
+      - name: Mayo Clinic
+        ref: https://www.mayoclinic.org/tests-procedures/in-vitro-fertilization/about/pac-20384716
+        access: live
+      - name: ASRM booklet
+        ref: https://www.reproductivefacts.org/news-and-publications/fact-sheets-and-infographics/assisted-reproductive-technologies-booklet/
+        access: live
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "Mayo 2023; ASRM 2015/2018 ed."
+
+- id: glossary.ohss_term
+  kind: glossary
+  phase: cross
+  topic: OHSS (ovarian hyperstimulation syndrome)
+  aliases: [OHSS, ovarian hyperstimulation syndrome, гиперстимуляция яичников]
+  body: >
+    A condition that can occur after ovarian stimulation, in which the ovaries become swollen
+    and painful and fluid can build up in the body. Most cases are mild; it's rarely severe.
+  scope: in_scope
+  confidence: agreed
+  source:
+    cite:
+      - name: Mayo Clinic
+        ref: https://www.mayoclinic.org/tests-procedures/in-vitro-fertilization/about/pac-20384716
+        access: live
+      - name: NHS
+        ref: https://www.nhs.uk/tests-and-treatments/ivf/
+        access: live
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "Mayo 2023; NHS 2025"
+
+- id: glossary.frozen_embryo_transfer
+  kind: glossary
+  phase: 3
+  topic: Frozen embryo transfer (FET)
+  aliases: [FET, frozen embryo transfer, криоперенос]
+  body: >
+    A cycle in which a previously frozen embryo is thawed and transferred to the uterus,
+    separate from the original stimulation and retrieval cycle.
+  scope: in_scope
+  confidence: agreed
+  source:
+    cite:
+      - name: MedlinePlus
+        ref: https://medlineplus.gov/ency/article/007279.htm
+        access: live
+      - name: SART
+        ref: https://www.sart.org/patients/a-patients-guide-to-assisted-reproductive-technology/
+        access: from_report
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "MedlinePlus 2026"
+
+- id: glossary.ovarian_reserve
+  kind: glossary
+  phase: 1
+  topic: Ovarian reserve
+  aliases: [ovarian reserve, AMH, antral follicle count, овариальный резерв]
+  body: >
+    A general measure of a woman's remaining egg supply, assessed before a cycle using blood
+    tests (such as AMH) and an ultrasound count of small follicles (antral follicle count).
+  scope: in_scope
+  confidence: agreed
+  source:
+    cite:
+      - name: ASRM booklet
+        ref: https://www.reproductivefacts.org/news-and-publications/fact-sheets-and-infographics/assisted-reproductive-technologies-booklet/
+        access: live
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "2015/2018 ed."
+
+# ---------- stage ----------
+
+- id: stage.cycle_overview
+  kind: stage
+  phase: cross
+  topic: Overall IVF cycle length
+  aliases: [how long does IVF take, cycle length, duration of IVF, сколько длится цикл ЭКО]
+  body: >
+    A full IVF cycle covers ovarian stimulation, egg retrieval, fertilization, embryo transfer,
+    and luteal support. Sources give different overall lengths depending on whether a
+    suppression stage is included.
+  scope: in_scope
+  confidence: ranged
+  value_range:
+    metric: full_cycle_duration
+    values:
+      - source: Mayo Clinic
+        value: "about 2-3 weeks"
+      - source: NHS
+        value: "around 3-6 weeks"
+      - source: HFEA
+        value: "4-6 weeks (about 3 weeks if the suppression stage is skipped)"
+      - source: SART
+        value: "2-6 week period"
+  source:
+    cite:
+      - name: Mayo Clinic
+        ref: https://www.mayoclinic.org/tests-procedures/in-vitro-fertilization/about/pac-20384716
+        access: live
+      - name: NHS
+        ref: https://www.nhs.uk/tests-and-treatments/ivf/
+        access: live
+      - name: HFEA
+        ref: https://www.hfea.gov.uk/treatments/explore-all-treatments/in-vitro-fertilisation-ivf/
+        access: live
+      - name: SART
+        ref: https://www.sart.org/patients/a-patients-guide-to-assisted-reproductive-technology/
+        access: from_report
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "Mayo 2023; NHS 2025; HFEA 2016 (ongoing)"
+
+- id: stage.ovarian_stimulation
+  kind: stage
+  phase: 1
+  topic: Ovarian stimulation
+  aliases: [ovarian stimulation, superovulation, stimulation phase, стимуляция яичников]
+  body: >
+    Daily hormone injections encourage the ovaries to grow several eggs instead of the single
+    egg that develops naturally each month. Progress is tracked with vaginal ultrasounds and
+    blood tests.
+  scope: in_scope
+  confidence: ranged
+  value_range:
+    metric: stimulation_duration_days
+    values:
+      - source: ASRM booklet
+        value: "8-14 days"
+      - source: SART
+        value: "8-10 days (most women)"
+      - source: Mayo Clinic
+        value: "1-2 weeks"
+  source:
+    cite:
+      - name: ASRM booklet
+        ref: https://www.reproductivefacts.org/news-and-publications/fact-sheets-and-infographics/assisted-reproductive-technologies-booklet/
+        access: live
+      - name: SART
+        ref: https://www.sart.org/patients/a-patients-guide-to-assisted-reproductive-technology/
+        access: from_report
+      - name: Mayo Clinic
+        ref: https://www.mayoclinic.org/tests-procedures/in-vitro-fertilization/about/pac-20384716
+        access: live
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "ASRM 2015/2018 ed.; Mayo 2023"
+
+- id: stage.monitoring
+  kind: stage
+  phase: 1
+  topic: Monitoring during stimulation
+  aliases: [ultrasound monitoring, blood test monitoring, follicle tracking, мониторинг цикла]
+  body: >
+    While stimulating, you'll have repeated vaginal ultrasounds to track follicle growth and
+    blood tests to check hormone response. Estrogen typically rises as follicles grow, while
+    progesterone stays low until after ovulation.
+  scope: in_scope
+  confidence: agreed
+  source:
+    cite:
+      - name: ASRM booklet
+        ref: https://www.reproductivefacts.org/news-and-publications/fact-sheets-and-infographics/assisted-reproductive-technologies-booklet/
+        access: live
+      - name: Mayo Clinic
+        ref: https://www.mayoclinic.org/tests-procedures/in-vitro-fertilization/about/pac-20384716
+        access: live
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "ASRM 2015/2018 ed.; Mayo 2023"
+
+- id: stage.cycle_cancellation
+  kind: stage
+  phase: 1
+  topic: Cycle cancellation before retrieval
+  aliases: [cancelled cycle, cycle cancellation, why was my cycle cancelled, отмена цикла]
+  body: >
+    A cycle may be cancelled before egg retrieval, most often because too few follicles are
+    developing; other reasons include premature ovulation or an excessive response raising OHSS
+    risk. Up to about 20% of cycles are cancelled before retrieval.
+  scope: in_scope
+  confidence: single_source
+  source:
+    cite:
+      - name: ASRM booklet
+        ref: https://www.reproductivefacts.org/news-and-publications/fact-sheets-and-infographics/assisted-reproductive-technologies-booklet/
+        access: live
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "2015/2018 ed."
+
+- id: stage.trigger
+  kind: stage
+  phase: 1
+  topic: Trigger injection
+  aliases: [trigger shot, hCG trigger, trigger injection, укол-триггер]
+  body: >
+    When follicles are mature, a "trigger" injection (hCG or another medication) causes the
+    eggs to finish maturing so they can be retrieved. Its exact timing is set by your clinic
+    and is critical — egg retrieval is scheduled a fixed time afterward.
+  scope: in_scope
+  confidence: agreed
+  source:
+    cite:
+      - name: ASRM booklet
+        ref: https://www.reproductivefacts.org/news-and-publications/fact-sheets-and-infographics/assisted-reproductive-technologies-booklet/
+        access: live
+      - name: SART
+        ref: https://www.sart.org/patients/a-patients-guide-to-assisted-reproductive-technology/
+        access: from_report
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "ASRM 2015/2018 ed."
+
+- id: stage.trigger_to_retrieval_window
+  kind: stage
+  phase: 2
+  topic: Trigger-to-retrieval timing window
+  aliases: [trigger to retrieval time, when is retrieval after trigger, hours after trigger shot, время от триггера до пункции]
+  body: >
+    Egg retrieval is scheduled a set number of hours after the trigger injection, timed to
+    happen just before natural ovulation would occur. Sources give slightly different windows.
+  scope: in_scope
+  confidence: ranged
+  value_range:
+    metric: trigger_to_retrieval_hours
+    values:
+      - source: ASRM booklet
+        value: "34-36 h"
+      - source: Mayo Clinic
+        value: "34-36 h"
+      - source: SART
+        value: "ovulation typically 36-40 h after trigger"
+  source:
+    cite:
+      - name: ASRM booklet
+        ref: https://www.reproductivefacts.org/news-and-publications/fact-sheets-and-infographics/assisted-reproductive-technologies-booklet/
+        access: live
+      - name: Mayo Clinic
+        ref: https://www.mayoclinic.org/tests-procedures/in-vitro-fertilization/about/pac-20384716
+        access: live
+      - name: SART
+        ref: https://www.sart.org/patients/a-patients-guide-to-assisted-reproductive-technology/
+        access: from_report
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "ASRM 2015/2018 ed.; Mayo 2023"
+
+- id: stage.egg_retrieval_procedure
+  kind: stage
+  phase: 2
+  topic: Egg retrieval procedure
+  aliases: [egg collection procedure, what happens during egg retrieval, забор яйцеклеток процедура]
+  body: >
+    Using ultrasound guidance, a thin needle is passed through the vagina into each follicle to
+    draw out the fluid and egg. The procedure usually takes under 30 minutes and is done with
+    sedation or pain medication; cramping and fullness afterward are common.
+  scope: in_scope
+  confidence: agreed
+  source:
+    cite:
+      - name: ASRM booklet
+        ref: https://www.reproductivefacts.org/news-and-publications/fact-sheets-and-infographics/assisted-reproductive-technologies-booklet/
+        access: live
+      - name: Mayo Clinic
+        ref: https://www.mayoclinic.org/tests-procedures/in-vitro-fertilization/about/pac-20384716
+        access: live
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "ASRM 2015/2018 ed.; Mayo 2023"
+
+- id: stage.fertilization
+  kind: stage
+  phase: 2
+  topic: Fertilization (IVF vs ICSI)
+  aliases: [fertilization step, how are eggs fertilized, IVF vs ICSI, оплодотворение]
+  body: >
+    Retrieved eggs are mixed with sperm (conventional insemination) or, if fertilization is
+    less likely to succeed on its own, a single sperm is injected into each mature egg (ICSI).
+    Usually 65-75% of mature eggs fertilize.
+  scope: in_scope
+  confidence: agreed
+  source:
+    cite:
+      - name: ASRM booklet
+        ref: https://www.reproductivefacts.org/news-and-publications/fact-sheets-and-infographics/assisted-reproductive-technologies-booklet/
+        access: live
+      - name: Mayo Clinic
+        ref: https://www.mayoclinic.org/tests-procedures/in-vitro-fertilization/about/pac-20384716
+        access: live
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "ASRM 2015/2018 ed.; Mayo 2023"
+
+- id: stage.embryo_culture
+  kind: stage
+  phase: 2
+  topic: Embryo culture
+  aliases: [embryo culture, embryo development in lab, культивирование эмбрионов]
+  body: >
+    Fertilized eggs are grown in the lab for several days. By day 3 an embryo usually has about
+    6-10 cells; by day 5 it may reach the blastocyst stage. Embryos can be transferred any time
+    from day 1 to day 6 after retrieval.
+  scope: in_scope
+  confidence: agreed
+  source:
+    cite:
+      - name: ASRM booklet
+        ref: https://www.reproductivefacts.org/news-and-publications/fact-sheets-and-infographics/assisted-reproductive-technologies-booklet/
+        access: live
+      - name: Mayo Clinic
+        ref: https://www.mayoclinic.org/tests-procedures/in-vitro-fertilization/about/pac-20384716
+        access: live
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "ASRM 2015/2018 ed.; Mayo 2023"
+
+- id: stage.embryo_transfer
+  kind: stage
+  phase: 3
+  topic: Embryo transfer
+  aliases: [embryo transfer, transfer procedure, перенос эмбриона]
+  body: >
+    A thin catheter guided through the cervix places one or more embryos into the uterus. No
+    anesthesia is usually needed, though a mild sedative is an option; some cramping is common.
+    Timing after retrieval varies by source.
+  scope: in_scope
+  confidence: ranged
+  value_range:
+    metric: days_after_retrieval_to_transfer
+    values:
+      - source: Mayo Clinic
+        value: "2-6 days"
+      - source: HFEA
+        value: "2-5 days after fertilisation"
+      - source: MedlinePlus
+        value: "3-5 days after retrieval"
+  source:
+    cite:
+      - name: ASRM booklet
+        ref: https://www.reproductivefacts.org/news-and-publications/fact-sheets-and-infographics/assisted-reproductive-technologies-booklet/
+        access: live
+      - name: Mayo Clinic
+        ref: https://www.mayoclinic.org/tests-procedures/in-vitro-fertilization/about/pac-20384716
+        access: live
+      - name: HFEA
+        ref: https://www.hfea.gov.uk/treatments/explore-all-treatments/in-vitro-fertilisation-ivf/
+        access: live
+      - name: MedlinePlus
+        ref: https://medlineplus.gov/ency/article/007279.htm
+        access: live
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "ASRM 2015/2018 ed.; Mayo 2023; MedlinePlus 2026"
+
+- id: stage.luteal_support_stage
+  kind: stage
+  phase: 3
+  topic: Luteal phase support
+  aliases: [luteal support, progesterone after transfer, hormone support after transfer, поддержка лютеиновой фазы]
+  body: >
+    After transfer, progesterone (and sometimes estrogen) is given to help the uterine lining
+    support a pregnancy. Support is continued until the pregnancy test, and further if the
+    result is positive, per your clinic's plan.
+  scope: in_scope
+  confidence: agreed
+  source:
+    cite:
+      - name: SART
+        ref: https://www.sart.org/patients/a-patients-guide-to-assisted-reproductive-technology/
+        access: from_report
+      - name: MedlinePlus
+        ref: https://medlineplus.gov/ency/article/007279.htm
+        access: live
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "MedlinePlus 2026"
+
+- id: stage.pregnancy_test
+  kind: stage
+  phase: 3
+  topic: Pregnancy blood test (beta-hCG) timing
+  aliases: [when is the pregnancy test, beta-hCG test date, when to test after transfer, когда делать тест на беременность]
+  body: >
+    Sources give different windows for the beta-hCG blood test after embryo transfer or
+    retrieval. All stress testing only on the exact date the clinic assigns, since testing
+    early can give a false result.
+  scope: in_scope
+  confidence: ranged
+  value_range:
+    metric: days_to_pregnancy_test
+    values:
+      - source: MedlinePlus
+        value: "about 12-14 days after embryo transfer"
+      - source: Mayo Clinic
+        value: "at least 12 days after egg retrieval"
+      - source: NHS
+        value: "around 16 days after embryo transfer"
+  source:
+    cite:
+      - name: MedlinePlus
+        ref: https://medlineplus.gov/ency/article/007279.htm
+        access: live
+      - name: Mayo Clinic
+        ref: https://www.mayoclinic.org/tests-procedures/in-vitro-fertilization/about/pac-20384716
+        access: live
+      - name: NHS
+        ref: https://www.nhs.uk/tests-and-treatments/ivf/
+        access: live
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "MedlinePlus 2026; Mayo 2023; NHS 2025"
+
+- id: stage.protocol_antagonist
+  kind: stage
+  phase: 1
+  topic: GnRH antagonist protocol
+  aliases: [antagonist protocol, short protocol, антагонист-протокол]
+  body: >
+    A stimulation approach where gonadotropin injections start first, and an antagonist
+    medication is added partway through stimulation to prevent premature ovulation. It uses
+    fewer injection days than the long agonist protocol.
+  scope: in_scope
+  confidence: single_source
+  source:
+    cite:
+      - name: HFEA
+        ref: https://www.hfea.gov.uk/treatments/explore-all-treatments/in-vitro-fertilisation-ivf/
+        access: live
+      - name: SART
+        ref: https://www.sart.org/patients/a-patients-guide-to-assisted-reproductive-technology/
+        access: from_report
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "HFEA 2016 (ongoing)"
+
+- id: stage.protocol_long_agonist
+  kind: stage
+  phase: 1
+  topic: Long GnRH agonist protocol
+  aliases: [long protocol, long agonist protocol, downregulation protocol, длинный протокол]
+  body: >
+    A stimulation approach where a daily agonist injection or nasal spray first suppresses
+    natural hormone production for a couple of weeks; once suppression is confirmed by scan,
+    gonadotropin stimulation begins.
+  scope: in_scope
+  confidence: single_source
+  source:
+    cite:
+      - name: HFEA
+        ref: https://www.hfea.gov.uk/treatments/explore-all-treatments/in-vitro-fertilisation-ivf/
+        access: live
+      - name: NHS
+        ref: https://www.nhs.uk/tests-and-treatments/ivf/
+        access: live
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "HFEA 2016 (ongoing); NHS 2025"
+
+- id: stage.protocol_flare
+  kind: stage
+  phase: 1
+  topic: Short / flare agonist protocol
+  aliases: [flare protocol, microdose flare, short agonist protocol, флэр-протокол]
+  body: >
+    A stimulation approach where the agonist is started at the beginning of the cycle,
+    alongside or just before gonadotropins, using its initial stimulating effect to help
+    recruit follicles early. Sometimes used for lower ovarian responders.
+  scope: in_scope
+  confidence: single_source
+  source:
+    cite:
+      - name: SART
+        ref: https://www.sart.org/patients/a-patients-guide-to-assisted-reproductive-technology/
+        access: from_report
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: null
+
+- id: stage.protocol_generic_coh
+  kind: stage
+  phase: 1
+  topic: Controlled ovarian stimulation (generic / umbrella term)
+  aliases: [controlled ovarian hyperstimulation, COH, ovulation induction, superovulation, стимуляция суперовуляции]
+  body: >
+    The umbrella term for using hormone medications to stimulate the ovaries to produce
+    multiple eggs. All named protocols (antagonist, long agonist, flare) are variations of this
+    same underlying process, differing mainly in how premature ovulation is prevented.
+  scope: in_scope
+  confidence: agreed
+  source:
+    cite:
+      - name: ASRM booklet
+        ref: https://www.reproductivefacts.org/news-and-publications/fact-sheets-and-infographics/assisted-reproductive-technologies-booklet/
+        access: live
+      - name: MedlinePlus
+        ref: https://medlineplus.gov/ency/article/007279.htm
+        access: live
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "ASRM 2015/2018 ed.; MedlinePlus 2026"
+
+# ---------- medication ----------
+
+- id: med.gonadotropin
+  kind: medication
+  phase: 1
+  topic: Gonadotropins (ovarian stimulation)
+  aliases: [gonadotropin, FSH injection, Gonal-F, Menopur, Puregon, Follistim, гонадотропины, менопур, гонал-ф]
+  drug_class: gonadotropin
+  names: [Menopur, Gonal-F, Puregon, Follistim, Bravelle, Repronex]
+  purpose: >
+    Stimulates the ovaries to grow multiple follicles/eggs during a treatment cycle, instead of
+    the single egg that develops in a natural cycle.
+  alternatives_group: gonadotropin_injectable
+  body: >
+    An injectable hormone medication (FSH, sometimes combined with LH) that drives the ovaries
+    to grow several eggs at once. Given daily during the stimulation phase; your clinic chooses
+    the specific product.
+  scope: in_scope
+  confidence: agreed
+  source:
+    cite:
+      - name: Mayo Clinic
+        ref: https://www.mayoclinic.org/tests-procedures/in-vitro-fertilization/about/pac-20384716
+        access: live
+      - name: SART
+        ref: https://www.sart.org/patients/a-patients-guide-to-assisted-reproductive-technology/
+        access: from_report
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "Mayo 2023"
+
+- id: med.gnrh_agonist
+  kind: medication
+  phase: 1
+  topic: GnRH agonists (suppression / premature-ovulation prevention)
+  aliases: [GnRH agonist, Lupron, leuprolide, Synarel, Suprecur, agonist injection, агонист ГнРГ, люпрон]
+  drug_class: gnrh_agonist
+  names: [Lupron, Leuprolide, Synarel, Suprecur, Zoladex, Decapeptyl, Diphereline, Triptorelin]
+  purpose: >
+    Prevents the pituitary gland from triggering a premature LH surge and early ovulation
+    during stimulation. Used in the long and flare protocols; can also be used as a trigger.
+  alternatives_group: gnrh_agonist_class
+  body: >
+    A medication (injection or nasal spray) that suppresses natural ovulation signals so the
+    ovaries can be stimulated on the clinic's schedule instead of the body's own cycle.
+  scope: in_scope
+  confidence: agreed
+  source:
+    cite:
+      - name: SART
+        ref: https://www.sart.org/patients/a-patients-guide-to-assisted-reproductive-technology/
+        access: from_report
+      - name: HFEA
+        ref: https://www.hfea.gov.uk/treatments/explore-all-treatments/in-vitro-fertilisation-ivf/
+        access: live
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "HFEA 2016 (ongoing)"
+
+- id: med.gnrh_antagonist
+  kind: medication
+  phase: 1
+  topic: GnRH antagonists (suppression / premature-ovulation prevention)
+  aliases: [GnRH antagonist, Cetrotide, Orgalutran, Ganirelix, Fyremadel, antagonist injection, антагонист ГнРГ, цетротид]
+  drug_class: gnrh_antagonist
+  names: [Cetrotide, Orgalutran, Ganirelix, Fyremadel]
+  purpose: >
+    Immediately blocks the pituitary signal that would otherwise trigger a premature LH surge,
+    typically started partway through stimulation once follicles reach a certain size.
+  alternatives_group: gnrh_antagonist_class
+  body: >
+    A medication used mid-stimulation to stop the ovaries from releasing eggs too early, part
+    of the antagonist protocol.
+  scope: in_scope
+  confidence: agreed
+  source:
+    cite:
+      - name: SART
+        ref: https://www.sart.org/patients/a-patients-guide-to-assisted-reproductive-technology/
+        access: from_report
+      - name: HFEA
+        ref: https://www.hfea.gov.uk/treatments/explore-all-treatments/in-vitro-fertilisation-ivf/
+        access: live
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "HFEA 2016 (ongoing)"
+
+- id: med.trigger_hcg
+  kind: medication
+  phase: 1
+  topic: hCG trigger
+  aliases: [hCG trigger, Ovidrel, Ovitrelle, Pregnyl, Novarel, Profasi, trigger shot, триггер ХГЧ, овитрель, прегнил]
+  drug_class: trigger_hcg
+  names: [Ovidrel, Ovitrelle, Pregnyl, Novarel, Profasi]
+  purpose: >
+    Replaces the body's natural LH surge to cause the final maturation of the eggs so they are
+    ready to be retrieved and are capable of being fertilized.
+  alternatives_group: trigger_medication
+  body: >
+    A single injection given once follicles are mature; it prompts the eggs to finish maturing
+    ahead of a precisely timed egg retrieval.
+  scope: in_scope
+  confidence: agreed
+  source:
+    cite:
+      - name: ASRM booklet
+        ref: https://www.reproductivefacts.org/news-and-publications/fact-sheets-and-infographics/assisted-reproductive-technologies-booklet/
+        access: live
+      - name: SART
+        ref: https://www.sart.org/patients/a-patients-guide-to-assisted-reproductive-technology/
+        access: from_report
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "ASRM 2015/2018 ed."
+
+- id: med.trigger_agonist
+  kind: medication
+  phase: 1
+  topic: GnRH-agonist trigger
+  aliases: [agonist trigger, Lupron trigger, dual trigger, агонист-триггер]
+  drug_class: trigger_agonist
+  names: [Leuprolide, Lupron]
+  purpose: >
+    An alternative to the hCG trigger that also causes final egg maturation ahead of retrieval;
+    sometimes combined with hCG as a "dual trigger."
+  alternatives_group: trigger_medication
+  body: >
+    A trigger option using a GnRH agonist instead of, or together with, hCG to mature the eggs
+    before retrieval. Your clinic decides which trigger type fits your situation.
+  scope: in_scope
+  confidence: single_source
+  source:
+    cite:
+      - name: SART
+        ref: https://www.sart.org/patients/a-patients-guide-to-assisted-reproductive-technology/
+        access: from_report
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: null
+
+- id: med.progesterone
+  kind: medication
+  phase: 3
+  topic: Progesterone (luteal support)
+  aliases: [progesterone, Crinone, Utrogestan, Endometrin, Cyclogest, Gestone, прогестерон, крайнон, утрожестан]
+  drug_class: progesterone
+  names: [Crinone, Utrogestan, Endometrin, Cyclogest, Gestone]
+  purpose: >
+    Supports the lining of the uterus after embryo transfer to help an embryo implant. Comes in
+    several interchangeable forms (vaginal gel, insert, or injection) chosen by your clinic.
+  alternatives_group: luteal_progesterone
+  body: >
+    A hormone given after transfer to prepare and maintain the uterine lining. Your clinic
+    decides the form and how long to continue it, usually up to the pregnancy test and beyond
+    if positive.
+  scope: in_scope
+  confidence: agreed
+  source:
+    cite:
+      - name: SART
+        ref: https://www.sart.org/patients/a-patients-guide-to-assisted-reproductive-technology/
+        access: from_report
+      - name: MedlinePlus
+        ref: https://medlineplus.gov/ency/article/007279.htm
+        access: live
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "MedlinePlus 2026"
+
+- id: med.estrogen
+  kind: medication
+  phase: 3
+  topic: Estrogen support (mainly frozen embryo transfer)
+  aliases: [estrogen support, estradiol valerate, Progynova, эстрогеновая поддержка, прогинова]
+  drug_class: estrogen
+  names: [Progynova, Estradiol valerate]
+  purpose: >
+    Helps prepare and thicken the uterine lining, mainly used in medicated frozen embryo
+    transfer cycles alongside progesterone.
+  alternatives_group: luteal_estrogen
+  body: >
+    A hormone used, chiefly in a medicated frozen embryo transfer cycle, to help build the
+    uterine lining before and around the time of transfer.
+  scope: in_scope
+  confidence: single_source
+  source:
+    cite:
+      - name: SART
+        ref: https://www.sart.org/patients/a-patients-guide-to-assisted-reproductive-technology/
+        access: from_report
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: null
+
+# ---------- instruction ----------
+
+- id: instr.fasting_before_retrieval
+  kind: instruction
+  phase: 2
+  topic: Fasting before egg retrieval
+  aliases: [fasting, empty stomach, no food before retrieval, nil by mouth, натощак, не есть перед пункцией]
+  body: >
+    Because egg retrieval is done under sedation, you are asked not to eat or drink for a set
+    period beforehand, as instructed by your clinic. Arriving without fasting can mean the
+    procedure has to be postponed.
+  unmet_action: escalate_to_clinic
+  scope: in_scope
+  confidence: agreed
+  source:
+    cite:
+      - name: Mayo Clinic
+        ref: https://www.mayoclinic.org/tests-procedures/in-vitro-fertilization/about/pac-20384716
+        access: live
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "Mayo 2023"
+
+- id: instr.no_driving_after_sedation
+  kind: instruction
+  phase: 2
+  topic: No driving after sedation
+  aliases: [no driving after retrieval, need a ride home, can't drive after sedation, нельзя за руль после пункции]
+  body: >
+    Because a sedative is used for egg retrieval, you cannot drive yourself home afterward. A
+    responsible adult should take you home, and you should avoid driving or operating machinery
+    for the rest of the day.
+  unmet_action: escalate_to_clinic
+  scope: in_scope
+  confidence: single_source
+  source:
+    cite:
+      - name: ASRM booklet
+        ref: https://www.reproductivefacts.org/news-and-publications/fact-sheets-and-infographics/assisted-reproductive-technologies-booklet/
+        access: live
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "2015/2018 ed."
+
+- id: instr.rest_after_retrieval
+  kind: instruction
+  phase: 2
+  topic: Activity limits after egg retrieval
+  aliases: [rest after retrieval, activity restrictions, avoid strenuous exercise after retrieval, ограничение активности после пункции]
+  body: >
+    Expect cramping and a feeling of fullness for some time after retrieval because the ovaries
+    remain enlarged. Vigorous activity and sex should be avoided until your clinic advises it's
+    fine to resume.
+  unmet_action: escalate_to_clinic
+  scope: in_scope
+  confidence: single_source
+  source:
+    cite:
+      - name: ASRM booklet
+        ref: https://www.reproductivefacts.org/news-and-publications/fact-sheets-and-infographics/assisted-reproductive-technologies-booklet/
+        access: live
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "2015/2018 ed."
+
+- id: instr.partner_abstinence
+  kind: instruction
+  phase: 2
+  topic: Partner ejaculatory abstinence before sample
+  aliases: [abstinence before semen sample, days without ejaculation before IVF, воздержание перед сдачей спермы]
+  body: >
+    Your partner may be asked to abstain from ejaculation for a set number of days before
+    giving the semen sample used on retrieval day, as instructed by the clinic's lab.
+  unmet_action: escalate_to_clinic
+  scope: in_scope
+  confidence: single_source
+  source:
+    cite:
+      - name: SART
+        ref: https://www.sart.org/patients/a-patients-guide-to-assisted-reproductive-technology/
+        access: from_report
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: null
+
+- id: instr.trigger_exact_timing
+  kind: instruction
+  phase: 1
+  topic: Take the trigger injection at the exact prescribed time
+  aliases: [trigger shot timing, take trigger on time, missed trigger shot, точное время укола-триггера]
+  body: >
+    The trigger injection must be given at the exact time your clinic specifies, since egg
+    retrieval is scheduled a fixed number of hours afterward. If it is given late, missed, or
+    incorrectly, contact your clinic immediately rather than adjusting it yourself.
+  unmet_action: escalate_to_clinic
+  scope: in_scope
+  confidence: agreed
+  source:
+    cite:
+      - name: ASRM booklet
+        ref: https://www.reproductivefacts.org/news-and-publications/fact-sheets-and-infographics/assisted-reproductive-technologies-booklet/
+        access: live
+      - name: SART
+        ref: https://www.sart.org/patients/a-patients-guide-to-assisted-reproductive-technology/
+        access: from_report
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "ASRM 2015/2018 ed."
+
+- id: instr.pregnancy_test_on_assigned_date
+  kind: instruction
+  phase: 3
+  topic: Take the pregnancy test on the assigned date
+  aliases: [when to test for pregnancy, don't test early, test on the date given, тест на беременность в назначенный день]
+  body: >
+    Take your pregnancy blood test only on the date your clinic assigns. Testing earlier can
+    give an inaccurate result — a false positive from residual trigger medication, or a false
+    negative if levels are still too low.
+  unmet_action: escalate_to_clinic
+  scope: in_scope
+  confidence: agreed
+  source:
+    cite:
+      - name: NHS
+        ref: https://www.nhs.uk/tests-and-treatments/ivf/
+        access: live
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "NHS 2025"
+
+# ---------- warning ----------
+
+- id: warn.ohss.contact_clinic
+  kind: warning
+  phase: cross
+  topic: Possible OHSS or other concerning symptoms — contact clinic
+  aliases: [bloating, feeling sick, feeling faint, coughing up blood, vaginal bleeding, brown discharge, pain passing urine or stool, вздутие, тошнота]
+  tier: contact_clinic
+  match_patterns:
+    - pain and bloating in the tummy
+    - feeling or being sick
+    - feeling faint
+    - coughing up blood
+    - vaginal bleeding or brown watery discharge
+    - pain or discomfort passing urine or stool
+  body: >
+    These symptoms can occur after ovarian stimulation or embryo transfer and should be
+    reported to your clinic promptly rather than managed on your own.
+  verbatim_text: >
+    These can be signs that need clinic assessment. Please contact the clinic's emergency line
+    now: AVA-Peter emergency line for ART patients +7 (921) 753-17-38 (20:00-08:00), dispatcher
+    +7 (812) 600-77-78 (08:00-20:00). If you cannot reach them or feel very unwell, seek urgent
+    medical care immediately.
+  scope: in_scope
+  confidence: agreed
+  source:
+    cite:
+      - name: NHS
+        ref: https://www.nhs.uk/tests-and-treatments/ivf/
+        access: live
+      - name: AVA-Peter card
+        ref: SC_PatientCardA6_18sept2019.pdf
+        access: clinic_card
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "NHS 2025; card 2019"
+
+- id: warn.ohss.urgent
+  kind: warning
+  phase: cross
+  topic: Possible severe OHSS / urgent symptoms
+  aliases: [OHSS, severe bloating, shortness of breath, one-sided pain, shoulder tip pain, гиперстимуляция, тяжелая гиперстимуляция]
+  tier: urgent_care
+  match_patterns:
+    - difficulty breathing
+    - severe or one-sided tummy pain
+    - shoulder-tip pain
+    - passing very little urine / very thirsty
+    - rapid swelling or weight gain
+    - chest or upper-back pain
+  body: >
+    Severe ovarian hyperstimulation syndrome (OHSS) is uncommon but serious. Warning signs
+    include difficulty breathing, severe or one-sided abdominal pain, shoulder-tip pain, rapid
+    swelling, and passing very little urine.
+  verbatim_text: >
+    These can be signs of a serious problem. Please contact the clinic's emergency line now:
+    AVA-Peter emergency line for ART patients +7 (921) 753-17-38 (20:00-08:00), dispatcher
+    +7 (812) 600-77-78 (08:00-20:00). If you cannot reach them or feel very unwell, seek urgent
+    medical care immediately.
+  scope: in_scope
+  confidence: agreed
+  source:
+    cite:
+      - name: NHS
+        ref: https://www.nhs.uk/tests-and-treatments/ivf/
+        access: live
+      - name: AVA-Peter card
+        ref: SC_PatientCardA6_18sept2019.pdf
+        access: clinic_card
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "NHS 2025; card 2019"
+
+- id: warn.post_transfer.bleeding_pain
+  kind: warning
+  phase: 3
+  topic: Moderate/severe pain or heavy bleeding after embryo transfer
+  aliases: [heavy bleeding after transfer, severe pain after transfer, cramping after transfer, кровотечение после переноса]
+  tier: contact_clinic
+  match_patterns:
+    - moderate or severe pain after embryo transfer
+    - heavy vaginal bleeding after embryo transfer
+  body: >
+    Mild cramping and spotting are common after embryo transfer, but moderate-to-severe pain or
+    heavy bleeding should be reported to your care team rather than waited out.
+  verbatim_text: >
+    Please contact the clinic's emergency line now: AVA-Peter emergency line for ART patients
+    +7 (921) 753-17-38 (20:00-08:00), dispatcher +7 (812) 600-77-78 (08:00-20:00). If you cannot
+    reach them or feel very unwell, seek urgent medical care immediately.
+  scope: in_scope
+  confidence: single_source
+  source:
+    cite:
+      - name: Mayo Clinic
+        ref: https://www.mayoclinic.org/tests-procedures/in-vitro-fertilization/about/pac-20384716
+        access: live
+      - name: AVA-Peter card
+        ref: SC_PatientCardA6_18sept2019.pdf
+        access: clinic_card
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "Mayo 2023; card 2019"
+
+- id: warn.post_ivf.fever_infection
+  kind: warning
+  phase: cross
+  topic: Fever, pelvic pain, or blood in urine after IVF
+  aliases: [fever after IVF, pelvic pain after IVF, blood in urine, infection signs, температура после ЭКО]
+  tier: contact_clinic
+  match_patterns:
+    - fever over 100.5F / 38C
+    - pelvic pain
+    - heavy vaginal bleeding
+    - blood in the urine
+  body: >
+    A fever, new pelvic pain, heavy bleeding, or blood in the urine after an IVF procedure can
+    signal infection or another complication and should be reported right away.
+  verbatim_text: >
+    Please contact the clinic's emergency line now: AVA-Peter emergency line for ART patients
+    +7 (921) 753-17-38 (20:00-08:00), dispatcher +7 (812) 600-77-78 (08:00-20:00). If you cannot
+    reach them or feel very unwell, seek urgent medical care immediately.
+  scope: in_scope
+  confidence: single_source
+  source:
+    cite:
+      - name: MedlinePlus
+        ref: https://medlineplus.gov/ency/article/007279.htm
+        access: live
+      - name: AVA-Peter card
+        ref: SC_PatientCardA6_18sept2019.pdf
+        access: clinic_card
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "MedlinePlus 2026; card 2019"
+
+- id: warn.ectopic_possible
+  kind: warning
+  phase: 3
+  topic: Possible ectopic pregnancy signs
+  aliases: [one-sided abdominal pain, shoulder tip pain pregnancy, ectopic pregnancy signs, внематочная беременность признаки]
+  tier: urgent_care
+  match_patterns:
+    - tummy pain low down on one side
+    - pain in the tip of the shoulder
+    - dehydration signs after positive test
+  body: >
+    Low one-sided abdominal pain or shoulder-tip pain after a positive pregnancy test can, per
+    guideline sources, indicate either severe OHSS or an ectopic pregnancy and needs prompt
+    evaluation.
+  verbatim_text: >
+    These can be signs of a serious problem. Please contact the clinic's emergency line now:
+    AVA-Peter emergency line for ART patients +7 (921) 753-17-38 (20:00-08:00), dispatcher
+    +7 (812) 600-77-78 (08:00-20:00). If you cannot reach them or feel very unwell, seek urgent
+    medical care immediately.
+  scope: in_scope
+  confidence: single_source
+  source:
+    cite:
+      - name: NHS
+        ref: https://www.nhs.uk/tests-and-treatments/ivf/
+        access: live
+      - name: AVA-Peter card
+        ref: SC_PatientCardA6_18sept2019.pdf
+        access: clinic_card
+  review:
+    validated_by: null
+    reviewed_on: null
+    source_dated: "NHS 2025; card 2019"
