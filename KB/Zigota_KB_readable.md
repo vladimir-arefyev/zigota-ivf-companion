@@ -516,7 +516,7 @@ These symptoms can occur after ovarian stimulation or embryo transfer and should
 
 - **Tier:** contact_clinic
 - **Triggers on:** pain and bloating in the tummy, feeling or being sick, feeling faint, coughing up blood, vaginal bleeding or brown watery discharge, pain or discomfort passing urine or stool
-- **Verbatim redirect:** These can be signs that need clinic assessment. Please contact the clinic's emergency line now: AVA-Peter emergency line for ART patients +7 (921) 753-17-38 (20:00-08:00), dispatcher +7 (812) 600-77-78 (08:00-20:00). If you cannot reach them or feel very unwell, seek urgent medical care immediately.
+- **Verbatim redirect:** These can be signs that need clinic assessment. Please contact the clinic's emergency line now. If you cannot reach them or feel very unwell, seek urgent medical care immediately.
 - **Source:** NHS (live); AVA-Peter card (clinic_card)
 - ⚠️ **verify-clinic-number** — Redirect uses the AVA-Peter card (2019). Confirm the phone numbers are still current with the clinic.
 
@@ -528,7 +528,7 @@ Severe ovarian hyperstimulation syndrome (OHSS) is uncommon but serious. Warning
 
 - **Tier:** urgent_care
 - **Triggers on:** difficulty breathing, severe or one-sided tummy pain, shoulder-tip pain, passing very little urine / very thirsty, rapid swelling or weight gain, chest or upper-back pain
-- **Verbatim redirect:** These can be signs of a serious problem. Please contact the clinic's emergency line now: AVA-Peter emergency line for ART patients +7 (921) 753-17-38 (20:00-08:00), dispatcher +7 (812) 600-77-78 (08:00-20:00). If you cannot reach them or feel very unwell, seek urgent medical care immediately.
+- **Verbatim redirect:** These can be signs of a serious problem. Please contact the clinic's emergency line now. If you cannot reach them or feel very unwell, seek urgent medical care immediately.
 - **Source:** NHS (live); AVA-Peter card (clinic_card)
 - ⚠️ **verify-clinic-number** — Redirect uses the AVA-Peter card (2019). Confirm the phone numbers are still current with the clinic.
 
@@ -540,7 +540,7 @@ Mild cramping and spotting are common after embryo transfer, but moderate-to-sev
 
 - **Tier:** contact_clinic
 - **Triggers on:** moderate or severe pain after embryo transfer, heavy vaginal bleeding after embryo transfer
-- **Verbatim redirect:** Please contact the clinic's emergency line now: AVA-Peter emergency line for ART patients +7 (921) 753-17-38 (20:00-08:00), dispatcher +7 (812) 600-77-78 (08:00-20:00). If you cannot reach them or feel very unwell, seek urgent medical care immediately.
+- **Verbatim redirect:** Please contact the clinic's emergency line now. If you cannot reach them or feel very unwell, seek urgent medical care immediately.
 - **Source:** Mayo Clinic (live); AVA-Peter card (clinic_card)
 - ⚠️ **verify-clinic-number** — Redirect uses the AVA-Peter card (2019). Confirm the phone numbers are still current with the clinic.
 
@@ -552,7 +552,7 @@ A fever, new pelvic pain, heavy bleeding, or blood in the urine after an IVF pro
 
 - **Tier:** contact_clinic
 - **Triggers on:** fever over 100.5F / 38C, pelvic pain, heavy vaginal bleeding, blood in the urine
-- **Verbatim redirect:** Please contact the clinic's emergency line now: AVA-Peter emergency line for ART patients +7 (921) 753-17-38 (20:00-08:00), dispatcher +7 (812) 600-77-78 (08:00-20:00). If you cannot reach them or feel very unwell, seek urgent medical care immediately.
+- **Verbatim redirect:** Please contact the clinic's emergency line now. If you cannot reach them or feel very unwell, seek urgent medical care immediately.
 - **Source:** MedlinePlus (live); AVA-Peter card (clinic_card)
 - ⚠️ **verify-clinic-number** — Redirect uses the AVA-Peter card (2019). Confirm the phone numbers are still current with the clinic.
 
@@ -564,6 +564,6 @@ Low one-sided abdominal pain or shoulder-tip pain after a positive pregnancy tes
 
 - **Tier:** urgent_care
 - **Triggers on:** tummy pain low down on one side, pain in the tip of the shoulder, dehydration signs after positive test
-- **Verbatim redirect:** These can be signs of a serious problem. Please contact the clinic's emergency line now: AVA-Peter emergency line for ART patients +7 (921) 753-17-38 (20:00-08:00), dispatcher +7 (812) 600-77-78 (08:00-20:00). If you cannot reach them or feel very unwell, seek urgent medical care immediately.
+- **Verbatim redirect:** These can be signs of a serious problem. Please contact the clinic's emergency line now. If you cannot reach them or feel very unwell, seek urgent medical care immediately.
 - **Source:** NHS (live); AVA-Peter card (clinic_card)
 - ⚠️ **verify-clinic-number** — Redirect uses the AVA-Peter card (2019). Confirm the phone numbers are still current with the clinic.
