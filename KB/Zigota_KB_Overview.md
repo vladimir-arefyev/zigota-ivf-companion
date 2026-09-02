@@ -115,14 +115,14 @@ Extraction packet (the job spec that produced the KB):
 - [00_README.md](00_README.md), [01_INSTRUCTIONS.md](01_INSTRUCTIONS.md), [02_SOURCES.md](02_SOURCES.md), [03_OUT_OF_SCOPE.md](03_OUT_OF_SCOPE.md), [04_KB_STRUCTURE.md](04_KB_STRUCTURE.md), [05_EXAMPLES.md](05_EXAMPLES.md), [06_SELF_CHECK.md](06_SELF_CHECK.md), [07_AUDITOR.md](07_AUDITOR.md)
 
 Evidence base:
-- **`Project_Zigota__IVF_ART_Patient-Education_Knowledge_Base_and_Three-Phase_Protocol_Model.md`** — the source-attributed research report / fallback source.
+- [Zigota_IVF_ART_Patient-Education_Knowledge_Base_and_Three-Phase_Protocol_Model.md](../Zigota_IVF_ART_Patient-Education_Knowledge_Base_and_Three-Phase_Protocol_Model.md) — the source-attributed research report / fallback source.
 
 Quality assurance:
-- **`07_AUDIT_REPORT.md`** — the auditor's report, including the live-fetch verification trace.
+- [07_AUDIT_REPORT.md](07_AUDIT_REPORT.md) — the auditor's report, including the live-fetch verification trace.
 
 Human-readable views (generated from `kb.yaml`):
-- **`Zigota_KB_review.html`** — interactive clinical review table (Approve / Needs-fix / Reject + notes + export). For the validation pass.
-- **`Zigota_KB_readable.md`** — browsable KB rendering for GitHub / portfolio.
+- [Zigota_KB_review.html](Zigota_KB_review.html) — interactive clinical review table (Approve / Needs-fix / Reject + notes + export). For the validation pass.
+- [Zigota_KB_readable.md](Zigota_KB_readable.md) — browsable KB rendering for GitHub / portfolio.
 
 Related design artifact:
-- **`Zigota_Protocol_Model_v2.md`** — the evidence-grounded protocol model the KB feeds.
+- [Zigota_Protocol_Model_v2.md](../Zigota_Protocol_Model_v2.md) — the evidence-grounded protocol model the KB feeds.
