@@ -1,4 +1,4 @@
-# IVF / ART Patient-Education Knowledge Base and Protocol Model (Project "Zigota")
+# IVF / ART Patient-Education Knowledge Base and Protocol Model
 
 ## TL;DR
 - A controlled-ovarian-stimulation IVF cycle is described to patients everywhere as the same three-phase arc: (1) daily ovarian stimulation with monitoring, (2) a precisely-timed trigger injection followed ~34–36 hours later by egg retrieval, and (3) fertilization/culture, embryo transfer, luteal (progesterone ± estrogen) support, and a beta-hCG blood test. All the "named protocols" (GnRH antagonist, long agonist, short/flare agonist) are just variations in HOW premature ovulation is prevented during phase 1 — they map onto the identical three-phase skeleton.
