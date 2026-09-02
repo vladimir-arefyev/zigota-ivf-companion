@@ -132,8 +132,8 @@ ranges attributed, warning redirect uses the clinic's own contact.
     rapid swelling, and passing very little urine.
   verbatim_text: >
     These can be signs of a serious problem. Please contact the clinic's emergency line now:
-    AVA-Peter emergency line for ART patients +7 (921) 753-17-38 (20:00-08:00),
-    dispatcher +7 (812) 600-77-78 (08:00-20:00). If you cannot reach them or feel very unwell,
+    AVA-Peter emergency line for ART patients +7 (9XX) XXX-XX-38 (20:00-08:00),
+    dispatcher +7 (8XX) XXX-XX-78 (08:00-20:00). If you cannot reach them or feel very unwell,
     seek urgent medical care immediately.
   scope: in_scope
   confidence: agreed
