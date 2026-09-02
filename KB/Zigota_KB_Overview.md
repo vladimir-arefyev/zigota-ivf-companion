@@ -109,11 +109,10 @@ Passing the audit is necessary, not sufficient: the KB ships only after step 2.
 ## Output files
 
 Source of truth:
-- **`kb.yaml`** — the 60-entry knowledge base (canonical; all views are generated from this).
+- [kb.yaml](kb.yaml) — the 60-entry knowledge base (canonical; all views are generated from this).
 
 Extraction packet (the job spec that produced the KB):
-- **`00_README.md`**, **`01_INSTRUCTIONS.md`**, **`02_SOURCES.md`**, **`03_OUT_OF_SCOPE.md`**,
-  **`04_KB_STRUCTURE.md`**, **`05_EXAMPLES.md`**, **`06_SELF_CHECK.md`**, **`07_AUDITOR.md`**
+- [00_README.md](00_README.md), [01_INSTRUCTIONS.md](01_INSTRUCTIONS.md), [02_SOURCES.md](02_SOURCES.md), [03_OUT_OF_SCOPE.md](03_OUT_OF_SCOPE.md), [04_KB_STRUCTURE.md](04_KB_STRUCTURE.md), [05_EXAMPLES.md](05_EXAMPLES.md), [06_SELF_CHECK.md](06_SELF_CHECK.md), [07_AUDITOR.md](07_AUDITOR.md)
 
 Evidence base:
 - **`Project_Zigota__IVF_ART_Patient-Education_Knowledge_Base_and_Three-Phase_Protocol_Model.md`** — the source-attributed research report / fallback source.
