@@ -4,7 +4,7 @@
 **Auditor**: Independent Knowledge Base Auditor  
 **Target File**: `kb.yaml` (60 entries)  
 **Specification & Rules**: `07_AUDITOR.md`, `06_SELF_CHECK.md`, `03_OUT_OF_SCOPE.md`, `04_KB_STRUCTURE.md`  
-**Reference Sources**: Primary Guideline & Patient Education Authorities (ASRM, NHS, Mayo Clinic, MedlinePlus, HFEA, SART), fallback research report (`compass_artifact_wf-4e451e4e-5682-59ac-87a6-ae345a9c9729_text_markdown.md`), and clinic source (`SC_PatientCardA6_18sept2019.pdf`).
+**Reference Sources**: Primary Guideline & Patient Education Authorities (ASRM, NHS, Mayo Clinic, MedlinePlus, HFEA, SART), fallback research report (`Zigota_IVF_ART_Patient-Education_Knowledge_Base_and_Three-Phase_Protocol_Model.md`), and clinic source (`SC_PatientCardA6_18sept2019.pdf`).
 
 ---
 
@@ -71,35 +71,35 @@ Verification trace covering all warning entries, `stage.trigger`, representative
 - **Fetch status**: Live URL successfully fetched; clinic card read from local repository.
 - **Supporting text in source**:
   - *Guideline symptom list*: *"Contact your fertility clinic or NHS 111 as soon as possible if: you have pain and bloating in your tummy (abdomen); you're feeling and being sick; you feel faint; you're coughing up blood; you have vaginal bleeding or a brown watery discharge; you have pain or discomfort when going for a poo or wee."* [NHS live page]
-  - *Clinic redirect string*: *"Телефон диспетчерской службы: +7 (812) 600-77-78 с 08:00 до 20:00; Телефон для экстренной связи (для пациентов в цикле ВРТ): +7 (921) 753-17-38 с 20:00 до 08:00."* [`SC_PatientCardA6_18sept2019.pdf`, p. 2]
+  - *Clinic redirect string*: *"Телефон диспетчерской службы: +7 (8XX) XXX-XX-78 с 08:00 до 20:00; Телефон для экстренной связи (для пациентов в цикле ВРТ): +7 (9XX) XXX-XX-38 с 20:00 до 08:00."* [`SC_PatientCardA6_18sept2019.pdf`, p. 2]
 
 #### `warn.ohss.urgent`
 - **Source ref / URL**: `https://www.nhs.uk/tests-and-treatments/ivf/` and local file `SC_PatientCardA6_18sept2019.pdf`
 - **Fetch status**: Live URL successfully fetched; clinic card read from local repository.
 - **Supporting text in source**:
   - *Guideline symptom list*: *"Call 999 or go to A&E if: you have difficulty breathing; you have pain in your chest or upper back; you’re very thirsty and peeing less than usual (dehydration); you have swelling in any part of your body; you have tummy pain, low down on one side; you have pain in the tip of your shoulder. These could be severe symptoms of ovarian hyperstimulation syndrome or an ectopic pregnancy."* [NHS live page]
-  - *Clinic redirect string*: *"Телефон диспетчерской службы: +7 (812) 600-77-78 с 08:00 до 20:00; Телефон для экстренной связи (для пациентов в цикле ВРТ): +7 (921) 753-17-38 с 20:00 до 08:00."* [`SC_PatientCardA6_18sept2019.pdf`, p. 2]
+  - *Clinic redirect string*: *"Телефон диспетчерской службы: +7 (8XX) XXX-XX-78 с 08:00 до 20:00; Телефон для экстренной связи (для пациентов в цикле ВРТ): +7 (9XX) XXX-XX-38 с 20:00 до 08:00."* [`SC_PatientCardA6_18sept2019.pdf`, p. 2]
 
 #### `warn.post_transfer.bleeding_pain`
 - **Source ref / URL**: `https://www.mayoclinic.org/tests-procedures/in-vitro-fertilization/about/pac-20384716` and local file `SC_PatientCardA6_18sept2019.pdf`
 - **Fetch status**: Live URL successfully fetched; clinic card read from local repository.
 - **Supporting text in source**:
   - *Guideline symptom list*: *"Call your care team if you have moderate or severe pain, or heavy bleeding from the vagina after the embryo transfer."* [Mayo Clinic live page]
-  - *Clinic redirect string*: *"Телефон диспетчерской службы: +7 (812) 600-77-78 с 08:00 до 20:00; Телефон для экстренной связи (для пациентов в цикле ВРТ): +7 (921) 753-17-38 с 20:00 до 08:00."* [`SC_PatientCardA6_18sept2019.pdf`, p. 2]
+  - *Clinic redirect string*: *"Телефон диспетчерской службы: +7 (8XX) XXX-XX-78 с 08:00 до 20:00; Телефон для экстренной связи (для пациентов в цикле ВРТ): +7 (9XX) XXX-XX-38 с 20:00 до 08:00."* [`SC_PatientCardA6_18sept2019.pdf`, p. 2]
 
 #### `warn.post_ivf.fever_infection`
 - **Source ref / URL**: `https://medlineplus.gov/ency/article/007279.htm` and local file `SC_PatientCardA6_18sept2019.pdf`
 - **Fetch status**: Live URL successfully fetched; clinic card read from local repository.
 - **Supporting text in source**:
   - *Guideline symptom list*: *"Contact your provider right away if you had IVF and have: A fever over 100.5°F (38°C); Pelvic pain; Heavy bleeding from the vagina; Blood in the urine"* [MedlinePlus live page]
-  - *Clinic redirect string*: *"Телефон диспетчерской службы: +7 (812) 600-77-78 с 08:00 до 20:00; Телефон для экстренной связи (для пациентов в цикле ВРТ): +7 (921) 753-17-38 с 20:00 до 08:00."* [`SC_PatientCardA6_18sept2019.pdf`, p. 2]
+  - *Clinic redirect string*: *"Телефон диспетчерской службы: +7 (8XX) XXX-XX-78 с 08:00 до 20:00; Телефон для экстренной связи (для пациентов в цикле ВРТ): +7 (9XX) XXX-XX-38 с 20:00 до 08:00."* [`SC_PatientCardA6_18sept2019.pdf`, p. 2]
 
 #### `warn.ectopic_possible`
 - **Source ref / URL**: `https://www.nhs.uk/tests-and-treatments/ivf/` and local file `SC_PatientCardA6_18sept2019.pdf`
 - **Fetch status**: Live URL successfully fetched; clinic card read from local repository.
 - **Supporting text in source**:
   - *Guideline symptom list*: *"Call 999 or go to A&E if: ... you have tummy pain, low down on one side; you have pain in the tip of your shoulder. These could be severe symptoms of ovarian hyperstimulation syndrome or an ectopic pregnancy."* [NHS live page]
-  - *Clinic redirect string*: *"Телефон диспетчерской службы: +7 (812) 600-77-78 с 08:00 до 20:00; Телефон для экстренной связи (для пациентов в цикле ВРТ): +7 (921) 753-17-38 с 20:00 до 08:00."* [`SC_PatientCardA6_18sept2019.pdf`, p. 2]
+  - *Clinic redirect string*: *"Телефон диспетчерской службы: +7 (8XX) XXX-XX-78 с 08:00 до 20:00; Телефон для экстренной связи (для пациентов в цикле ВРТ): +7 (9XX) XXX-XX-38 с 20:00 до 08:00."* [`SC_PatientCardA6_18sept2019.pdf`, p. 2]
 
 ---
 
