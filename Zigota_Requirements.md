@@ -2,7 +2,7 @@
 
 *Domain & requirements for the MVP: job stories, acceptance criteria, and explicit non-requirements, grounded in the real protocol and the non-SaMD boundary.*
 
-**Status:** Draft v0.1 · **Author:** Vladimir Arefyev · **Companion docs:** `Zigota_Vision_Brief_2025.md`, `Zigota_Build_and_Content_Plan.md`, `Zigota_Architecture_2025.md`
+**Status:** Draft v0.2 · **Author:** Vladimir Arefyev · **Companion docs:** `Zigota_Vision_Brief_2025.md`, `Zigota_Build_and_Content_Plan.md`, `Zigota_Architecture_2025.md`
 
 ---
 
@@ -151,7 +151,7 @@ The highest-risk, highest-value flow. Upload the card, map it to the protocol mo
 *Acceptance criteria — negative*
 - The trigger cannot be confirmed as part of a batch or swept in with routine items.
 - A profile anchor never resolves or shifts the trigger's time; it is exactly-timed, not anchor-relative.
-- *(Trigger reminder behaviour is specified in Block 2; onboarding owns the separate confirmation only.)*
+- Onboarding owns the trigger's *separate confirmation* only. Its reminder behaviour — including the trigger-specific cascade — is specified in 2.2. There is no contradiction: distinct confirmation, cascade reminders, standard lead mechanism underneath.
 
 **1.7** When my card offers a choice of drugs for one slot (this *or* that), I want to pick the one I was actually given before it counts, so my schedule reflects what I'm really taking and not a guess.
 
@@ -189,7 +189,7 @@ The highest-risk, highest-value flow. Upload the card, map it to the protocol mo
 
 ## Block 2 — Tracking
 
-Daily plan, reminders, progress, confirmation, symptom capture with KB warning-sign escalation, health check-in, non-medication procedure-prep, emergency access, and chat plan queries. Deterministic tracker core plus the Tracker Agent.
+Daily plan, reminders, progress, confirmation, symptom capture with KB warning-sign escalation, health check-in, non-medication procedure-prep, emergency access, chat plan queries, and cycle cancellation. Deterministic tracker core plus the Tracker Agent.
 
 **2.1** When I open the app on a given day, I want to see what's due today, so I know what to do without reading the whole protocol.
 
@@ -206,11 +206,12 @@ Daily plan, reminders, progress, confirmation, symptom capture with KB warning-s
 *Acceptance criteria — positive*
 - For each pending item, a push fires at its resolved event time minus the global lead time.
 - The reminder identifies the item and its due time.
-- The trigger reminds by this same mechanism; global lead applies.
+- The trigger uses the standard reminder mechanism but with a trigger-specific cascade: an earlier reminder 2 hours before its exact time, the standard reminder at exact-time-minus-lead, and a follow-up 1 hour after the exact time if it is still unconfirmed. This is the one reminder asymmetry in the system, justified by the trigger being the single event whose mistiming can end the cycle.
 
 *Acceptance criteria — negative*
 - No reminder fires for an item whose anchor is unset; the gap is surfaced in actions-needed, not fired blindly.
-- No reminder fires for an item in a terminal state (confirmed, missed, skipped).
+- No reminder fires for a routine item in a terminal state (confirmed, missed, skipped).
+- The trigger's post-time follow-up fires only while the trigger is unconfirmed; confirming it cancels any pending follow-up.
 - The reminder does not assess or comment on the dose; it states what and when.
 - Delivery is subject to browser/OS conditions (permission, service worker, platform); reliable delivery is not guaranteed (see Known MVP limitations).
 
@@ -266,17 +267,20 @@ Daily plan, reminders, progress, confirmation, symptom capture with KB warning-s
 - The app does not assess, diagnose, triage, or rate the severity of a symptom; a KB match surfaces cited information and the contact path, never a judgment that *this* symptom is dangerous.
 - The app does not suggest a cause or a treatment.
 - On no match, the app captures silently and says nothing reassuring — a non-match never implies "you're fine" (N3). The match is an additional prompt toward escalation, never a gate on it.
+- The match rule must be deterministic and testable: pass/fail is evaluated against a fixed benchmark set of canonical warning-sign phrasings (the exact matching mechanism — lexicon, embedding threshold, or hybrid — is a build-time choice, but it must be reproducible against that benchmark, not a free LLM judgment call).
 
-**2.7** When something feels seriously wrong and I'm frightened, I want fast access to my clinic's contact numbers and any emergency instructions they've given, so I can reach a human who can help instead of asking an app to judge how bad it is.
+**2.7** When something feels seriously wrong and I'm frightened, I want fast access to my clinic's contact numbers and any emergency instructions, so I can reach a human who can help instead of asking an app to judge how bad it is.
 
 *Acceptance criteria — positive*
-- The clinic's contact numbers and any clinic-provided emergency instructions are reachable quickly and always available.
+- Clinic contact numbers and emergency instructions are KB content (vetted, per-deployment) — the same governed, cited source as education, not patient-entered or per-cycle configured.
+- The clinic-contact action is reachable from every authenticated screen and from chat.
 - The information is presented plainly.
 
 *Acceptance criteria — negative*
 - The app does not actively notify the clinic (passive for MVP).
 - The app does not assess urgency or decide whether the patient should escalate.
 - The app does not gate emergency contact info behind a symptom assessment or any interpretation step.
+- The app does not represent a number as an emergency-services line unless the KB content marks it as one.
 
 **2.8** When the app checks in on how I'm feeling, I want to answer in my own words (overall condition, mood, any symptoms), so my experience is captured over time without me having to remember to report it.
 
@@ -312,6 +316,18 @@ Daily plan, reminders, progress, confirmation, symptom capture with KB warning-s
 - The app does not assess the consequence of an unmet instruction or decide whether the procedure can proceed; it routes to the clinic.
 - The app does not reassure that an unmet instruction is fine.
 
+**2.11** When my clinic cancels or freezes my cycle (poor response, hyperstimulation risk — 5 to 15% of cycles end before retrieval), I want to mark the cycle ended so my plan stops driving me toward events that won't happen, without losing what I already recorded.
+
+*Acceptance criteria — positive*
+- The patient can mark the cycle cancelled/ended.
+- On cancellation, all pending and prescribed-unscheduled items move to a terminal *cancelled* state and stop reminding.
+- Confirmed, missed, and symptom/check-in history is preserved unchanged; the record of what happened up to cancellation stays intact.
+
+*Acceptance criteria — negative*
+- Cancellation does not delete history; it stops future scheduling, it does not erase the past.
+- The app does not decide to cancel on the patient's behalf, and does not interpret a clinical reason for cancellation; it records the patient's action.
+- No reminder fires for any item once the cycle is cancelled.
+
 ---
 
 ## Block 3 — Education (grounded Q&A)
@@ -333,7 +349,8 @@ Answers about the protocol, steps, procedures, drugs, and side effects — groun
 **3.2** When I ask something outside what the app can safely answer, I want it to tell me it doesn't know and point me to my clinic, so I'm never handed a confident guess.
 
 *Acceptance criteria — positive*
-- Scope is defined operationally: the app answers when KB retrieval returns relevant content, and falls back when it does not.
+- Scope is defined operationally: the app answers only when retrieval returns at least one approved KB passage that meets a configured relevance threshold and carries a patient-displayable citation; otherwise it falls back.
+- The relevance threshold is a set, testable value (the retrieval mechanism is a build-time choice, but "relevant" resolves to a reproducible cutoff, not a subjective judgment).
 - When a question falls outside KB scope, the app says plainly that it doesn't have that information and directs the patient to their clinic.
 - The fallback is unambiguous — it does not hedge into a partial guess.
 
@@ -446,14 +463,39 @@ Two columns per attribute: the **MVP posture** (what the demo-grade product actu
 
 The through-line: for a portfolio MVP, most NFRs are honestly demo-grade — but **safety is not on that curve**, because the whole product thesis is that the boundary is a structural property, provable now, not a number to hit later.
 
+**Post-MVP action item:** measurable NFR targets (latency percentiles, error-recovery timings, availability, accessibility conformance) are deliberately not invented for the demo. They become owned action items at the pre-pilot stage, where real load and real users make a target meaningful rather than fictional.
+
+---
+
+## Scope boundary — consciously deferred to pre-pilot
+
+Everything here is a *decision*, not a gap. Each is real and correct for a real-user product, and each is deliberately out of scope for a portfolio MVP built around one clinic's card and a curated KB. Naming them is the point: it distinguishes what was intentionally omitted from what was overlooked.
+
+Deferred to a pre-pilot / real-user baseline:
+
+- **Consent, privacy notice, and data-processing transparency** — recorded acknowledgement before first health-data capture, notice versioning, withdrawal handling. First pre-pilot requirement.
+- **In-cycle protocol amendment** — re-parsing a revised card / dose step-up-down mid-cycle while preserving confirmed history.
+- **Full timezone & clock semantics** — IANA-zone storage, DST transitions, travel, device-clock changes for routine anchor-relative items. (The trigger's fixed-moment rule is already in MVP.)
+- **Authentication lifecycle edges** — sign-in failure, account switching, logout, session expiry, lost device, token revocation, account-deletion self-service.
+- **Accessibility & localization conformance** — WCAG target, screen-reader support, focus order, contrast, text resize, beyond the language-switch disclaimer integrity already required.
+- **Notification content privacy** — lock-screen preview sensitivity, discreet-mode.
+- **Systematic error/recovery states** — upload/OCR/write/timeout/offline/model/citation-render failure modes as functional requirements.
+- **Data export / access workflow** — patient-facing export or access-request process (MVP posture: out-of-band administrative only).
+- **Admin actor model** — roles, authorization, approval, audit logging, deletion evidence for the administrator referenced in Block 5.
+- **Third-party data-flow governance** — analytics, crash reporting, LLM/OCR provider processing, FCM metadata; vendor allowlist; PHI-in-analytics prohibition.
+- **KB content governance** — medical-review status, approval, versioning, expiry, source hierarchy, citation format in every answer trace.
+- **Protocol permutations beyond the reference card** — medicated FET, donor/surrogate luteal-only tracking without retrieval.
+- **Formal traceability matrix & data dictionary** — immutable requirement IDs, per-requirement source/owner/risk/test linkage, full field-level data dictionary. (Useful for an auditable baseline; not required for a Phase-1 portfolio artifact.)
+
 ---
 
 ## Known MVP limitations
 
 Stated plainly, as credibility assets rather than omissions. To grow as the build surfaces more.
 
-- **Push delivery is best-effort.** Web push via FCM depends on notification permission being granted, the service worker being active, and the browser/OS permitting delivery. Mobile browsers — iOS Safari in particular — deliver web push unreliably. A reminder is not a guarantee the patient was notified.
+- **Push delivery is best-effort.** Web push via FCM depends on notification permission being granted, the service worker being active, and the browser/OS permitting delivery. Mobile browsers — iOS Safari in particular — deliver web push unreliably, and iOS requires the patient to add the web app to the Home Screen first. A reminder is not a guarantee the patient was notified — which is why the trigger carries a reminder cascade rather than a single push.
 - **Warning-sign matching is bounded by the KB, and is a prompt, not a safety guarantee.** The D2 check surfaces an escalation prompt only when a reported symptom matches KB warning-sign content. It can miss a real red flag the patient phrased in words the KB doesn't match (a false negative). It is deliberately an additional nudge on top of an always-available clinic-contact path, never the patient's only route to escalation — but it must not be presented, to a patient or a stakeholder, as reliable symptom triage. It is not triage.
+- **No consent flow.** The MVP does not obtain or record consent for health-data processing (see Scope boundary). It is a prototype, not a service processing real patient data.
 
 ---
 
@@ -468,11 +510,11 @@ Stated plainly, as credibility assets rather than omissions. To grow as the buil
 - **Confirmation** — the patient action that transitions an item from prescribed to scheduled. Records *that* the patient confirmed and *when they tapped*, never a claimed exact administration time.
 - **Trigger (injection)** — the single exactly-timed event whose mistiming can end the cycle. Confirmed separately at onboarding; exactly-timed, never anchor-relative.
 - **Not-yet-confirmed / pending** — the only mutable state; re-resolves when its anchor is edited.
-- **Terminal states** — confirmed, missed, or skipped. Frozen against automatic change (never re-timed by an anchor edit), but patient-correctable with a change-log entry.
+- **Terminal states** — confirmed, missed, skipped, or cancelled. Frozen against automatic change (never re-timed by an anchor edit), but patient-correctable with a change-log entry (cancellation excepted — it ends the cycle).
 - **Non-SaMD boundary** — the line the product stays behind: AI as interface to structured, vetted data, never a source of medical judgment. Enforced by architecture, not by prompt wording.
 - **Provenance envelope** — the metadata on every AI-derived record (status, source, raw extract, model version, edit history) that makes the non-SaMD boundary mechanically demonstrable.
 - **Three-phase arc** — the fixed cycle spine every card is an instance of: Phase 1 stimulation & monitoring → Phase 2 trigger & retrieval → Phase 3 transfer, luteal support & test.
-- **Item types (A / B / Mon / C / D1 / D2 / E)** — the seven shapes an item can take. A fixed daily dose; B single exactly-timed event (trigger); Mon monitoring/appointment; C continue-until-date/event course; D1 card-stated comfort conditional; D2 KB-sourced warning-sign escalation; E non-medication instruction. The model calls this "six types" with D1/D2 as the safety-driven split of one. See the Block 1 item-type model.
+- **Item types** — six conceptual types, represented by seven implementation labels because D splits into D1 and D2: A fixed daily dose; B single exactly-timed event (trigger); Mon monitoring/appointment; C continue-until-date/event course; D1 card-stated comfort conditional; D2 KB-sourced warning-sign escalation; E non-medication instruction. See the Block 1 item-type model.
 - **Alternatives** — a single prescription slot with mutually exclusive fills (Progynova *or* Divigel). The parse never picks; the patient selects one from the card's options. A hard confirmation gate.
 - **Prescribed-unscheduled** — a valid first-class state: an item has a prescribed dose but no date because the clinic sets it reactively (monitoring visits, the trigger, a C-course end). Visible but dormant; fires no reminder until a date is entered. Distinct from an unset-anchor gap (which is about the patient's routine, not a clinic date).
 - **Unset-anchor gap** — an item whose schedule rule is known but whose routine anchor the patient hasn't set. Resolved by the patient setting the anchor. Distinct from prescribed-unscheduled.
@@ -492,6 +534,7 @@ This document uses plainer state names than the protocol-model artifact. They ma
 | pending / scheduled | `active` | Confirmed and live; reminder-eligible. |
 | confirmed | `done` | Patient confirmed done; terminal, patient-correctable. |
 | missed / skipped | (terminal, not-confirmed) | Time passed unconfirmed; terminal, patient-correctable. |
+| cancelled | (terminal, cycle-ended) | Cycle cancelled/frozen; pending and unscheduled items stopped, history preserved. |
 | escalated | `escalated` | D2 match, Type E unmet, or trigger timing problem → clinic-contact path. |
 
 ---
@@ -500,20 +543,24 @@ This document uses plainer state names than the protocol-model artifact. They ma
 
 These are agreed and constrain the stories above.
 
-- **The item model has six types (A, B, Mon, C, D1/D2, E), grounded in the real card.** Reconciled from the protocol-model artifact after an earlier drift to four. The two recovered types carry safety weight: Mon (monitoring/appointment) and the D1/D2 split (card-stated comfort vs. KB-sourced warning-sign escalation). The MVP handles all six.
+- **The item model has six conceptual types, seven labels (A, B, Mon, C, D1, D2, E), grounded in the real card.** Six types with D split into D1/D2 for safety. Reconciled from the protocol-model artifact after an earlier drift to four. The two recovered types carry safety weight: Mon (monitoring/appointment) and the D1/D2 split (card-stated comfort vs. KB-sourced warning-sign escalation). The MVP handles all of them.
 - **Alternatives are a hard confirmation gate; the patient picks one from the card's options.** A slot with either/or fills never has one auto-picked. Selection is limited to the card's listed options (a drug not listed is a manual patient-entry). An item with unresolved alternatives never reaches the schedule.
 - **D2 warning signs live in the KB, for every cycle, independent of the card.** On a recorded symptom the companion checks the KB; a match surfaces cited warning-sign content plus the clinic-contact path, framed as information, never as a severity grade or a verdict about the patient. A non-match captures silently and never implies reassurance. The match is an extra prompt toward escalation, never a gate on it — the clinic-contact path is always available.
 - **Two distinct "no time yet" states.** *Prescribed-unscheduled* (clinic hasn't set the date; resolved by prompting the patient for the clinic date, reusing the health-check-in interaction pattern) and *unset-anchor gap* (patient hasn't set the routine anchor; resolved inline). Both are visible and dormant; neither ever gets a guessed time.
+- **Cycle cancellation is a first-class terminal transition.** A patient-marked cancellation moves all pending and prescribed-unscheduled items to a *cancelled* terminal state and stops all reminders, while preserving confirmed/missed/symptom history. Cancellation stops the future, never erases the past (2.11).
+- **An exactly-timed event's moment is timezone-fixed.** The trigger is confirmed against an exact clinic-set date/time and that absolute moment does not drift if the patient travels or a DST change occurs. General timezone/DST handling for routine anchor-relative items is deferred to pre-pilot (see Scope boundary); the trigger's fixed-moment rule holds in MVP because mistiming it can end the cycle.
+- **Consent and privacy acknowledgement are out of scope for MVP.** The MVP is a portfolio prototype not processing real patient data; it has no consent-record flow, privacy-notice acknowledgement, or withdrawal handling. A consent architecture (recorded acknowledgement before first health-data capture, notice versioning, withdrawal path) is the first pre-pilot requirement before any real-user deployment. Stated as a deliberate boundary, not an oversight.
+- **In-cycle protocol amendment is out of scope for MVP.** Clinics routinely adjust dosing mid-cycle (gonadotropin step-up/step-down on monitoring findings). MVP handles onboarding entry and manual correction only; re-parsing a revised card while preserving confirmed history is a named pre-pilot capability, not an MVP flow.
 - **The 2021/2022 spec files corroborate the model.** The mini-TZ and customer TZ (2021–2022) independently establish the anchor concept (meal times + wake/sleep as profile preferences that build the medication schedule), FCM push, the prescribed/scheduled split, missed-items-don't-carry-forward, and can't-edit-past-items — confirming these are durable domain findings, not new inventions. Their UI-first, phone-auth, iOS specifics are superseded by the 2025 conversation-first reframe.
 - **Anchor vocabulary is fixed.** A known set — wake, breakfast, lunch, dinner, bedtime. The parser maps card timing onto this set; timing it can't map is flagged, not guessed. Patient-named anchors are out of scope for MVP.
 - **Anchors are defined in the profile, independently of onboarding.** Onboarding never blocks on a missing anchor. It stores the prescribed rule as an anchor reference (`anchor + offset`); resolution to a clock time happens later, in tracking.
 - **Resolution happens at read, for not-yet-confirmed items only.** A scheduled item's source of truth is `anchor + offset`, never a frozen clock time — while it is still pending.
 - **Confirmation state, not calendar date, is the cut line.** Editing an anchor re-times every *not-yet-confirmed* item that depends on it. It never touches an item that is already confirmed, missed, or skipped.
 - **Completed and missed items are terminal and frozen against automatic change.** A confirmed item records *that* the patient confirmed it plus the confirmation timestamp (the moment of the tap) — never a claimed exact administration time. A missed/skipped item is recorded as "not confirmed." Neither is ever silently re-timed by an anchor edit. Both remain **patient-correctable**: the patient can un-confirm, or correct a missed item to confirmed, and every such change is recorded in the item's change log (provenance edit history). "Terminal" means no *automatic* process alters it, not that it is immutable.
-- **An item becomes missed when its time passes with no confirmation — by day rollover for routine items, by exact-time-passed for exactly-timed events.** A routine item stays pending through the day and becomes missed at day rollover (local end of the cycle day). An exactly-timed event (the trigger) becomes missed the moment its exact prescribed time passes unconfirmed, since being late is itself the failure. No per-item grace timer.
+- **An item becomes missed when its time passes with no confirmation — by cycle-day rollover for routine items, by exact-time-passed for exactly-timed events.** The cycle-day boundary is anchored to the patient's wake time, not to midnight: a dose belongs to the waking day it falls in, and a routine item becomes missed at the start of the next waking day (the wake anchor). This deliberately prevents a late-evening or post-midnight dose — bedtime vaginal progesterone is often taken at 01:00 — from being marked missed at 23:59 while the patient considers it part of the same day. An exactly-timed event (the trigger) becomes missed the moment its exact prescribed time passes unconfirmed, since being late is itself the failure. No per-item grace timer.
 - **The trigger injection is special-cased.** It is confirmed deliberately and separately at onboarding, and its reminder is handled distinctly from routine daily reminders.
 - **Provenance keeps the raw capture.** The uploaded image or voice transcript is stored and linked to the parsed-and-confirmed items for traceability. Manually entered items are marked patient-entered, distinct from clinic-sourced. (Full retention rules: Block 5.)
-- **Emergency is passive for MVP.** The app surfaces the clinic's contact numbers and any clinic-provided instructions, fast and always reachable. It does not actively notify the clinic and does not assess urgency. Active clinic notification is post-MVP.
+- **Emergency is passive for MVP, and contact data is KB content.** The clinic contact numbers and emergency instructions are vetted KB content (not patient-entered or per-cycle configured); the clinic-contact action is reachable from every authenticated screen and from chat. The app does not actively notify the clinic and does not assess urgency. Active clinic notification is post-MVP.
 - **Voice is a cross-cutting input modality.** It recurs in manual item entry, symptom capture, and Q&A. Held as a standalone story for now so its behaviour is specified once.
 - **Image capture is upload-only for MVP.** No in-app camera capture; the patient uploads an existing image. Re-upload is offered only when extraction returns no items at all — there is no partial-read threshold.
 - **MVP is a web app with two surfaces.** A *static dashboard* and a *dynamic chat*. The dashboard is a read-only view of confirmed state in three regions: **today's plan** (items due today with resolved times and state), **progress** (position across the three cycle phases), and **actions needed** (everything requiring patient action — unset-anchor gaps, flagged-incomplete items, doses awaiting a decision). The chat is where all interaction and communication happens — item correction, confirmation, symptom capture, health check-ins, Q&A, plan queries, and timed event messages. The dashboard reflects state; the chat is where state changes.
@@ -527,6 +574,8 @@ These are agreed and constrain the stories above.
 
 ## Status
 
-All five blocks have stories/constraints and acceptance criteria. Non-requirements (N1–N8) and non-functional requirements are written. The Phase 1 exit gate — every MVP capability has stories + acceptance criteria, every safety boundary is a testable negative, KB scope is bounded — is met.
+Draft v0.2 — incorporates two independent requirements reviews. All five blocks have stories/constraints and acceptance criteria. Non-requirements (N1–N8), non-functional requirements, a scope boundary of consciously-deferred pre-pilot items, and known limitations are written. The Phase 1 exit gate — every MVP capability has stories + acceptance criteria, every safety boundary is a testable negative, KB scope is bounded — is met.
+
+The review pass closed the load-bearing findings: cycle cancellation now has a terminal state (2.11); the cycle-day boundary is wake-anchored so post-midnight bedtime doses aren't wrongly missed; the trigger-reminder contradiction is resolved into a defined cascade (2.2); clinic-contact is modelled as KB content rather than an unmodelled dependency (2.7); the trigger's moment is timezone-fixed; and D2 matching and the education retrieval gate are specified as deterministic-against-benchmark rather than subjective. Consent and in-cycle amendment are recorded as explicit MVP-out-of-scope decisions; measurable NFR targets, full timezone handling, accessibility, traceability matrix, and the rest are named in the Scope boundary as deferred, not overlooked.
 
 Open reconciliations for later phases: none blocking. The clinic-layer data path (Vision Brief §6) and its consent design remain explicitly post-MVP.
