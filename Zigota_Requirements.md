@@ -2,7 +2,7 @@
 
 *Domain & requirements for the MVP: job stories, acceptance criteria, and explicit non-requirements, grounded in the real protocol and the non-SaMD boundary.*
 
-**Status:** Draft v0.2 · **Author:** Vladimir Arefyev · **Companion docs:** `Zigota_Vision_Brief_2025.md`, `Zigota_Build_and_Content_Plan.md`, `Zigota_Architecture_2025.md`
+**Status:** Draft v0.2 · **Author:** Vladimir Arefyev · **Companion docs:** `Zigota_Vision_Brief_Revised.md`, `Zigota_Build_and_Content_Plan.md`
 
 ---
 
