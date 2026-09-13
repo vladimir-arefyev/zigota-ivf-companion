@@ -2,7 +2,9 @@
 
 *Domain & requirements for the MVP: job stories, acceptance criteria, and explicit non-requirements, grounded in the real protocol and the non-SaMD boundary.*
 
-**Status:** Draft v0.2 · **Author:** Vladimir Arefyev · **Companion docs:** `Zigota_Vision_Brief_Revised.md`, `Zigota_Build_and_Content_Plan.md`
+**Status:** Draft v0.3 · **Author:** Vladimir Arefyev · **Companion docs:** `Zigota_Vision_Brief_2025.md`, `Zigota_Build_and_Content_Plan.md`, `Zigota_Architecture_2025.md`, `Zigota_Implementation_Plan_2025.md`
+
+*v0.3 — three scope decisions raised by the Phase 3 implementation plan, each routed here rather than settled in an implementation or architecture document. (1) Two-tier education grounding admitted, with a content taxonomy (Block 3) and an amended N5: Safety and Clinical answers stay curated-KB-only, General education may come from the allowlisted retrieval index with visible origin attribution. (2) Voice deferred to pre-pilot (1.8 in full; the voice alternative in 1.4, 2.6, 2.8), with its behavioural rule preserved for its return. (3) Block 5 split: the deletion-reachability data-model property becomes an MVP requirement (5.2a) while the administrative deletion and archival *operations* (5.3, 5.4) take a stated prototype position, resolving a v0.2 contradiction where 5.3 was an MVP deliverable whose actor model was deferred. Also aligned the lifecycle vocabulary with the architecture: escalation is an event, never a schedule-item state (glossary).*
 
 ---
 
@@ -118,10 +120,10 @@ The highest-risk, highest-value flow. Upload the card, map it to the protocol mo
 - A flagged-incomplete item cannot be confirmed until the patient completes the missing field.
 - Mapping writes nothing to the *scheduled* layer.
 
-**1.4** When the app couldn't read some items off my card, I want to add or correct those items myself by typing or by voice, so a partial parse doesn't leave holes in my schedule.
+**1.4** When the app couldn't read some items off my card, I want to add or correct those items myself by typing (voice deferred, see Scope boundary), so a partial parse doesn't leave holes in my schedule.
 
 *Acceptance criteria — positive*
-- The patient can add an item the parser missed, or correct a mis-parsed one, by typing or by voice.
+- The patient can add an item the parser missed, or correct a mis-parsed one, by typing. (Voice as an alternative input to this story is deferred to pre-pilot; the confirmation path below is identical either way.)
 - A manually entered item is marked patient-entered, distinct from clinic-sourced.
 - Manually entered items go through the same per-item confirmation (1.5) as parsed items before they count.
 
@@ -165,7 +167,9 @@ The highest-risk, highest-value flow. Upload the card, map it to the protocol mo
 - Selection is limited to the options the card lists; this gate offers no free-text alternative (a drug not on the card is a manual entry via 1.4, marked patient-entered).
 - An item with unresolved alternatives is never persisted to the schedule.
 
-**1.8** When I'd rather not type, I want to give my input by voice, so entering or correcting items is easier on a phone.
+**1.8 — DEFERRED to pre-pilot.** When I'd rather not type, I want to give my input by voice, so entering or correcting items is easier on a phone.
+
+*Deferral note.* Text plus photo proves the paradigm; the Transcriber seam sits at the Orchestrator's front door and stays empty in MVP. The acceptance criteria below are retained unchanged as the specification for when voice returns, because they already encode the rule that keeps it safe: speech supplies **reviewable draft input** and never itself commits or confirms a schedule mutation.
 
 *Acceptance criteria — positive*
 - Where input is invited (manual item entry, corrections), the patient can speak instead of type, and the transcript is captured.
@@ -258,7 +262,7 @@ Daily plan, reminders, progress, confirmation, symptom capture with KB warning-s
 **2.6** When something feels off physically, I want to record the symptom and be pointed to my clinic if it's something the vetted information flags, so nothing serious goes unnoticed — without the app telling me what my symptom means.
 
 *Acceptance criteria — positive*
-- The patient can record a symptom in the chat, by text or voice; it is captured verbatim as patient-reported, timestamped, and stored for the patient and clinic.
+- The patient can record a symptom in the chat by text (voice deferred, see Scope boundary); it is captured verbatim as patient-reported, timestamped, and stored for the patient and clinic.
 - On capture, the companion checks the symptom against the KB's warning-sign (D2) content, which is present for every cycle regardless of card.
 - On a match, the app surfaces the relevant KB content *with citation* and the clinic-contact path (2.7), framed as information — "our information lists this as something to raise with your clinic" — not as a verdict about the patient.
 - The clinic-contact path is available on every symptom report, independently of whether anything matched.
@@ -286,7 +290,7 @@ Daily plan, reminders, progress, confirmation, symptom capture with KB warning-s
 
 *Acceptance criteria — positive*
 - The app initiates an optional health check-in once daily, in the chat.
-- The patient can answer in their own words, by text or voice, covering overall condition, mood, and any symptoms.
+- The patient can answer in their own words by text (voice deferred, see Scope boundary), covering overall condition, mood, and any symptoms.
 - Responses are captured verbatim as patient-reported, timestamped, and stored for the patient and clinic.
 - Answering is optional; a skipped check-in is not treated as a missed obligation.
 
@@ -334,22 +338,34 @@ Daily plan, reminders, progress, confirmation, symptom capture with KB warning-s
 
 Answers about the protocol, steps, procedures, drugs, and side effects — grounded only in vetted material, with an honest fallback.
 
+**The content taxonomy.** Grounding scope depends on what kind of question is being asked, so the categories are defined once here and referenced by 3.1, 3.2 and N5. The taxonomy is deterministic and versioned; classification is testable against a labelled question set, not left to a model's judgment.
+
+- **Safety** — warning signs and escalation triggers (D2 content), emergency instructions, clinic contact information. Curated KB only, always.
+- **Clinical** — medications and drug safety, dosing-adjacent factual content, procedures and what they involve, non-medication instructions (Type E). Curated KB only.
+- **General education** — physiology, glossary terms, stage overviews, what to expect, timelines, lifestyle and emotional context, with no drug, procedure-instruction, or escalation content. May be answered from the allowlisted retrieval index (3.2).
+
+Where a question could fall into more than one category, **it is classified into the more restrictive one**. The classifier fails closed: ambiguity resolves to Clinical or to the fallback, never to General education. "What happens at egg retrieval" is the canonical grey case and classifies as Clinical, because a procedure description carries instruction weight.
+
 **3.1** When I don't understand a step, drug, or procedure in my protocol, I want to ask and get an answer grounded in vetted material, so I can understand what's happening without trawling the internet.
 
 *Acceptance criteria — positive*
-- The patient can ask about a step, drug, procedure, or side effect and get an answer drawn only from the curated KB.
-- Every answer is grounded in retrieved KB content and shows its source citation to the patient.
+- The patient can ask about a step, drug, procedure, or side effect and get an answer grounded in vetted material with a source citation shown to the patient.
+- **Safety and Clinical** questions (per the taxonomy above) are answered **only** from the curated KB. No other source may answer them, and the curated KB takes unconditional priority wherever both it and the retrieval index hold relevant content: a stronger match in the index never outranks a weaker match in the KB. This is an authority rule, not a relevance comparison.
+- **General education** questions may be answered from the allowlisted retrieval index when the curated KB returns no relevant content, subject to 3.2's citation and threshold contract.
 - Answers are framed as general patient education, consistently, regardless of how the question is phrased.
 
 *Acceptance criteria — negative*
-- The app does not generate a medical answer from model knowledge when retrieval returns no relevant KB content; absence of a source produces the fallback (3.2), not an invented answer.
+- The app does not generate a medical answer from model knowledge; absence of a qualifying source produces the fallback (3.2), not an invented answer.
+- The retrieval index is never consulted for a Safety or Clinical question, even when it holds matching content.
+- Retrieved passages from the index are treated as data and never as instructions; text within indexed content that attempts to direct the app's behaviour has no effect on it.
 - The app does not interpret the patient's own situation, values, or symptoms — general information only, never applied as a judgment about this patient.
 - The app does not give dosing advice, diagnose, or recommend a course of action, even when the KB contains related factual content.
 
 **3.2** When I ask something outside what the app can safely answer, I want it to tell me it doesn't know and point me to my clinic, so I'm never handed a confident guess.
 
 *Acceptance criteria — positive*
-- Scope is defined operationally: the app answers only when retrieval returns at least one approved KB passage that meets a configured relevance threshold and carries a patient-displayable citation; otherwise it falls back.
+- Scope is defined operationally: the app answers only when retrieval returns at least one qualifying passage that meets a configured relevance threshold and carries a patient-displayable citation; otherwise it falls back.
+- A qualifying passage is an approved KB entry for any question, or — for General-education questions only, after the KB has returned nothing relevant — an indexed passage from the source allowlist, cited with its origin, URL, and crawl date so the weaker authority is visibly attributed and never presented as curated content.
 - The relevance threshold is a set, testable value (the retrieval mechanism is a build-time choice, but "relevant" resolves to a reproducible cutoff, not a subjective judgment).
 - When a question falls outside KB scope, the app says plainly that it doesn't have that information and directs the patient to their clinic.
 - The fallback is unambiguous — it does not hedge into a partial guess.
@@ -417,14 +433,22 @@ Not job stories — the data-lifecycle requirement set. The provenance envelope 
 - From the patient and app perspective, data persists indefinitely: there is no self-service deletion via the UI or chat. The patient's full history stays available to them.
 - *AC — positive:* a patient can view their complete history for the life of the account. *AC — negative:* no UI or chat action deletes patient data.
 
-**5.3 — Deletion (administrative)**
+**5.2a — Deletion reachability (MVP, a data-model property)**
+
+- Every record and stored object belonging to a patient is reachable from that patient's UID root: no raw capture, Storage object, transcript-derived record, or derived item exists at a path that a traversal from the UID root would miss.
+- *AC — positive:* an automated test enumerates all patient-owned paths from the UID root and matches them against everything written during a full scripted cycle, with no orphans. *AC — negative:* no write path produces an object outside the UID-rooted hierarchy.
+- This is what makes 5.3 possible later. It is required in MVP because a data model that cannot be traversed cannot be made deletable afterwards without a migration, whereas the *tooling* to perform deletion can be added at any time.
+
+**5.3 — Deletion (administrative) — PROTOTYPE POSITION**
 
 - Deletion is available on user request, executed by an administrator through an out-of-band channel (not the app UI or chat).
 - Deletion removes the patient's data, including the raw captures whose derived items are removed.
 - *AC — positive:* an administrator can fully delete a patient's data on request. *AC — negative:* no automatic or in-app process performs deletion; it is always an administrative action on request.
+- **MVP status:** non-operational. The MVP delivers the traversal property (5.2a) and a written manual runbook, not an administrative tooling surface. The admin actor model this depends on is itself deferred (see Scope boundary), so stating 5.3 as an MVP deliverable while deferring its actor was an internal contradiction in v0.2. Resolved here in favour of the prototype position: the *capability to delete* is preserved structurally, the *operation* is pre-pilot.
 
-**5.4 — Archival**
+**5.4 — Archival — PROTOTYPE POSITION**
 
+- **MVP status:** non-operational, as 5.3. Eligibility is computable from data the MVP already holds (last scheduled item's date); no archival mechanism is built.
 - A completed cycle becomes eligible for archival one year after cycle completion (one year after the last scheduled item's date). Archival is administrator-initiated, not automatic — the year marks eligibility, not a trigger.
 - Archival is non-destructive and backend-only: archived data still exists, moved out of the active set; it has no user-facing effect, and the patient's view of their history is unchanged.
 - *AC — positive:* an administrator can archive a cycle once it is eligible; archived data is preserved. *AC — negative:* archival never fires automatically; it never deletes data; it does not remove anything from the patient's view.
@@ -441,7 +465,7 @@ The system must not:
 - **N2 — Interpret symptoms or values.** Assess, triage, rate, or explain the significance of a patient-reported symptom or any lab/measurement value.
 - **N3 — Reassure.** Tell a patient they are fine, that something is normal, or that they need not worry.
 - **N4 — Diagnose.** State or imply a diagnosis, or a probability of one.
-- **N5 — Generate medical content freely.** Answer a clinical or process question from model knowledge; such answers come only from the curated KB, with citation, or fall back.
+- **N5 — Generate medical content freely.** Answer a clinical or process question from model knowledge. **Safety and Clinical** answers (Block 3 taxonomy) come only from the curated KB, with citation, or fall back. **General-education** answers may come from the allowlisted retrieval index, with visible origin attribution, and never for Safety or Clinical questions. No answer of any kind is generated from model knowledge rather than retrieved content.
 - **N6 — Act autonomously on the parse.** Enter any parsed item into the schedule without explicit per-item patient confirmation.
 - **N7 — Assess urgency or escalate on the patient's behalf.** Decide whether a situation is an emergency; the app surfaces the contact path, the patient decides.
 - **N8 — Present derived timing or state as clinical truth.** Show a lead-shifted reminder time as the dose time, or a confirmation timestamp as a measured administration time.
@@ -473,6 +497,8 @@ Everything here is a *decision*, not a gap. Each is real and correct for a real-
 
 Deferred to a pre-pilot / real-user baseline:
 
+- **Voice as an input modality** — story 1.8 in full, and the voice alternative within 1.4, 2.6 and 2.8. Typed text and card-photo upload are the sole MVP input modalities. This is a sequencing decision, not a capability judgment: the architecture already places the Transcriber seam before intent classification, so voice returns as a modality flag rather than as new infrastructure. The behavioural rule survives the deferral and is recorded in Settled decisions: **speech may supply reviewable draft input; it may never itself commit or confirm a schedule mutation.**
+- **Administrative deletion and archival operations (5.3, 5.4)** — the admin workflow, authorization, approval, and deletion-evidence tooling. The *data-model property* that makes them possible is not deferred (see Block 5).
 - **Consent, privacy notice, and data-processing transparency** — recorded acknowledgement before first health-data capture, notice versioning, withdrawal handling. First pre-pilot requirement.
 - **In-cycle protocol amendment** — re-parsing a revised card / dose step-up-down mid-cycle while preserving confirmed history.
 - **Full timezone & clock semantics** — IANA-zone storage, DST transitions, travel, device-clock changes for routine anchor-relative items. (The trigger's fixed-moment rule is already in MVP.)
@@ -510,6 +536,8 @@ Stated plainly, as credibility assets rather than omissions. To grow as the buil
 - **Confirmation** — the patient action that transitions an item from prescribed to scheduled. Records *that* the patient confirmed and *when they tapped*, never a claimed exact administration time.
 - **Trigger (injection)** — the single exactly-timed event whose mistiming can end the cycle. Confirmed separately at onboarding; exactly-timed, never anchor-relative.
 - **Not-yet-confirmed / pending** — the only mutable state; re-resolves when its anchor is edited.
+- **Escalation** — a *safety event*, never a schedule-item state. A D2 warning-sign match, a surfaced contact path, an unmet Type E instruction, or a trigger-timing problem records an event that *references* an item; it never changes that item's lifecycle. This matters concretely: reporting a concerning symptom must not terminate a medication item or suppress its reminders, which is exactly what would happen if escalation were a terminal state. Schedule-item lifecycle governs scheduling and reminding only.
+- **Content taxonomy** — Safety, Clinical, General education. Defined in Block 3; determines which grounding source may answer a question. Ambiguity classifies into the more restrictive category.
 - **Terminal states** — confirmed, missed, skipped, or cancelled. Frozen against automatic change (never re-timed by an anchor edit), but patient-correctable with a change-log entry (cancellation excepted — it ends the cycle).
 - **Non-SaMD boundary** — the line the product stays behind: AI as interface to structured, vetted data, never a source of medical judgment. Enforced by architecture, not by prompt wording.
 - **Provenance envelope** — the metadata on every AI-derived record (status, source, raw extract, model version, edit history) that makes the non-SaMD boundary mechanically demonstrable.
@@ -561,10 +589,12 @@ These are agreed and constrain the stories above.
 - **The trigger injection is special-cased.** It is confirmed deliberately and separately at onboarding, and its reminder is handled distinctly from routine daily reminders.
 - **Provenance keeps the raw capture.** The uploaded image or voice transcript is stored and linked to the parsed-and-confirmed items for traceability. Manually entered items are marked patient-entered, distinct from clinic-sourced. (Full retention rules: Block 5.)
 - **Emergency is passive for MVP, and contact data is KB content.** The clinic contact numbers and emergency instructions are vetted KB content (not patient-entered or per-cycle configured); the clinic-contact action is reachable from every authenticated screen and from chat. The app does not actively notify the clinic and does not assess urgency. Active clinic notification is post-MVP.
-- **Voice is a cross-cutting input modality.** It recurs in manual item entry, symptom capture, and Q&A. Held as a standalone story for now so its behaviour is specified once.
+- **Voice is a cross-cutting input modality, deferred to pre-pilot (v0.3).** It recurs in manual item entry, symptom capture, and Q&A, and is specified once in 1.8. The behavioural rule holds whenever it ships: **speech may supply reviewable draft input; it may never itself commit or confirm a schedule mutation.** The patient sees the transcript, corrects it, and the standard per-item confirmation still gates the write. This is narrower than a blanket ban on voice touching schedule values, and deliberately so: the risk is an unreviewed transcript becoming truth, not speech as a medium.
 - **Image capture is upload-only for MVP.** No in-app camera capture; the patient uploads an existing image. Re-upload is offered only when extraction returns no items at all — there is no partial-read threshold.
 - **MVP is a web app with two surfaces.** A *static dashboard* and a *dynamic chat*. The dashboard is a read-only view of confirmed state in three regions: **today's plan** (items due today with resolved times and state), **progress** (position across the three cycle phases), and **actions needed** (everything requiring patient action — unset-anchor gaps, flagged-incomplete items, doses awaiting a decision). The chat is where all interaction and communication happens — item correction, confirmation, symptom capture, health check-ins, Q&A, plan queries, and timed event messages. The dashboard reflects state; the chat is where state changes.
-- **Education Q&A scope is retrieval-defined, with visible citations.** The Education Agent answers only when KB retrieval returns relevant content, and falls back ("I don't have that — ask your clinic") when it does not. There is no separate topic whitelist; what the retrieval finds defines scope. Every answer shows its source citation to the patient, reinforcing that content comes from vetted material, not model opinion. Citation-or-refuse is a hard gate: no citation, no answer.
+- **Education Q&A scope is retrieval-defined, with visible citations.** The Education Agent answers only when retrieval returns relevant content, and falls back ("I don't have that — ask your clinic") when it does not. There is no separate topic whitelist; what the retrieval finds defines scope. Every answer shows its source citation. Citation-or-refuse is a hard gate: no citation, no answer.
+- **Grounding is two-tiered and partitioned by clinical risk (v0.3).** The curated KB holds Safety and Clinical content; the allowlisted retrieval index holds General education. The corpora do not overlap, which is what makes the split a safety property rather than a retrieval preference: a classification miss on a safety question finds nothing relevant in the index and falls back, instead of answering from the wrong authority. The classifier and the partition must both fail for a safety question to be answered from non-curated content. The curated KB takes unconditional priority on any contested question.
+- **Administrative data operations take a prototype position (v0.3).** The MVP guarantees that patient data is fully traversable from the UID root (5.2a) and ships a manual runbook. It does not build administrative deletion or archival tooling. The capability is preserved structurally; the operation is pre-pilot.
 - **Authentication is via Google account (OAuth) for MVP.** Real, cross-device identity; each identity sees only its own data.
 - **Storage is single-region GCP with default encryption.** One GCP region defines geographic residency; encryption is GCP default at rest and in transit; no application-level encryption beyond defaults in MVP.
 - **Data persists indefinitely from the patient's perspective.** No self-service deletion via UI or chat. Deletion is available on user request, executed by an administrator out-of-band. A completed cycle is eligible for administrator-initiated, non-destructive archival one year after completion. Retention rules are therefore all "until administrative action," never user-triggered.
@@ -577,5 +607,7 @@ These are agreed and constrain the stories above.
 Draft v0.2 — incorporates two independent requirements reviews. All five blocks have stories/constraints and acceptance criteria. Non-requirements (N1–N8), non-functional requirements, a scope boundary of consciously-deferred pre-pilot items, and known limitations are written. The Phase 1 exit gate — every MVP capability has stories + acceptance criteria, every safety boundary is a testable negative, KB scope is bounded — is met.
 
 The review pass closed the load-bearing findings: cycle cancellation now has a terminal state (2.11); the cycle-day boundary is wake-anchored so post-midnight bedtime doses aren't wrongly missed; the trigger-reminder contradiction is resolved into a defined cascade (2.2); clinic-contact is modelled as KB content rather than an unmodelled dependency (2.7); the trigger's moment is timezone-fixed; and D2 matching and the education retrieval gate are specified as deterministic-against-benchmark rather than subjective. Consent and in-cycle amendment are recorded as explicit MVP-out-of-scope decisions; measurable NFR targets, full timezone handling, accessibility, traceability matrix, and the rest are named in the Scope boundary as deferred, not overlooked.
+
+**v0.3 addendum.** Three decisions arrived from the Phase 3 implementation plan, and the discipline is worth recording: each was a *scope* change that an implementation or architecture document had already made or assumed, and each was routed back here before the corresponding slice is built. Two-tier grounding had been introduced in the architecture and would have shipped against an unamended N5. Voice had been deferred by the architecture and silently omitted from the build plan while remaining an MVP requirement here. Block 5 asserted an MVP deliverable whose actor model this document itself deferred. The first two are the same failure mode in opposite directions, and both are now closed in the document that owns scope.
 
 Open reconciliations for later phases: none blocking. The clinic-layer data path (Vision Brief §6) and its consent design remain explicitly post-MVP.
